@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>页面未找到</title>
+    <style>
+        /* 页面整体设置 */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #333;
+            background-color: #f7f7f7;
+        }
+
+        /* 标题样式 */
+        h1 {
+            font-size: 3em;
+            color: #d9534f; /* 红色 */
+            margin-bottom: 0.5em;
+        }
+
+        /* 描述文本样式 */
+        p {
+            font-size: 1.2em;
+            margin-bottom: 1.5em;
+            color: #555;
+        }
+
+        /* 返回首页按钮 */
+        a {
+            text-decoration: none;
+            color: #fff;
+            background-color: #5bc0de; /* 蓝色 */
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+
+        /* 按钮悬停效果 */
+        a:hover {
+            background-color: #31b0d5; /* 深蓝色 */
+        }
+    </style>
+</head>
+<body>
+    <h1>404 错误 - 页面未找到</h1>
+    <p>抱歉，您访问的页面不存在。</p>
+    <a href="{{ url_for('home') }}">返回首页</a>
+</body>
+</html>

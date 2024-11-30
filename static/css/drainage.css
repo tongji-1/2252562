@@ -1,0 +1,321 @@
+#situation {
+    min-height: 100vh;
+}
+
+.main-content {
+    padding: 30px;
+    min-height: 100vh;
+    margin-top: 100px; 
+}
+
+/*左侧导航栏*/
+#situation {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .navbar {
+    position: fixed;
+    top: -100px;
+    left: 0;
+    width: 100%;
+    background-color: rgb(255, 255, 255); /* 半透明背景 */
+    color: white;
+    padding: 10px 0;
+    z-index: 1000;
+    transition: top 0.3s;
+  }
+  
+  .navbar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .navbar li {
+    padding: 20px;
+  }
+  
+  .navbar a {
+    color: rgba(255, 255, 255, 0.372);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+  
+  .navbar a:hover {
+    color: #ddd;
+  }
+  
+  .section {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+  }
+  
+  /* 响应式设计 */
+  @media (max-width: 768px) {
+    .navbar ul {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .navbar li {
+      padding: 10px 0;
+    }
+  }
+  
+  /* 导航栏隐藏时的样式 */
+  .navbar-hidden {
+    top: -100px; /* 初始隐藏 */
+  }
+  
+  /* 添加一些动画效果 */
+  @keyframes slideDown {
+    from {
+      top: -100px;
+    }
+    to {
+      top: 0;
+    }
+  }
+  
+  @keyframes slideUp {
+    from {
+      top: 0;
+    }
+    to {
+      top: -100px;
+    }
+  }
+
+
+
+
+/* 页脚样式 */
+footer {
+  background-color: #ffffff; /* 设置白色背景 */
+  padding: 15px 0;
+  font-size: 14px;
+  color: #666;
+  position: relative; /* 保持 footer 在文档流中 */
+  width: 100%;
+  margin-top: auto; /* 让 footer 自动位于页面底部 */
+  z-index: 10; /* 确保 footer 位于背景图上方 */
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* 添加轻微阴影以分隔 footer */
+}
+
+/* 页脚内容布局 */
+.footer-content {
+  display: flex;
+  flex-direction: column; /* 使内容和按钮垂直排列 */
+  align-items: center;
+  width: 100%;
+  max-width: 1800px;
+  margin: 0 auto;
+}
+
+/* 页脚主区域，默认折叠状态 */
+.footer-main {
+  max-height: none; /* 展开状态显示所有内容 */
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 100%;
+  transition: max-height 0.3s ease; /* 添加展开收起的动画效果 */
+}
+
+/* 默认折叠状态 */
+.footer-main.collapsed {
+  max-height: 30px; /* 控制默认展示的高度 */
+  overflow: hidden;
+}
+
+/* 各个页脚 section 样式 */
+.footer-section {
+  flex: 1;
+  min-width: 230px; /* 每个 section 的最小宽度 */
+  padding: 10px;
+  text-align: left;
+}
+
+/* 页脚 section 标题样式 */
+.footer-section h3 {
+  font-size: 10px;
+  margin-bottom: 10px;
+  color: #333; /* 标题颜色 */
+}
+
+/* 页脚列表样式 */
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section ul li {
+  margin: 5px 0;
+}
+
+.footer-section ul li a {
+  color: #666; /* 链接颜色 */
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-section ul li a:hover {
+  color: #007bff; /* 鼠标悬停时的颜色 */
+}
+
+/* 页脚底部版权信息 */
+.footer-bottom {
+  text-align: center;
+  margin-top: 7px;
+  font-size: 7px;
+  color: #999;
+}
+
+/* 展开/收起按钮样式 */
+#toggle-footer {
+  background-color: #007bff; /* 按钮背景颜色 */
+  color: #ffffff; /* 按钮文字颜色 */
+  border: none;
+  border-radius: 5px; /* 圆角边框 */
+  cursor: pointer;
+  padding: 8px 16px; /* 内边距 */
+  font-size: 14px;
+  margin-top: 10px;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* 悬停和点击效果 */
+}
+
+/* 悬停时的效果 */
+#toggle-footer:hover {
+  background-color: #0056b3; /* 加深背景颜色 */
+  transform: scale(1.05); /* 放大效果 */
+}
+
+/* 点击时的效果 */
+#toggle-footer:active {
+  background-color: #004080; /* 更深的背景颜色 */
+  transform: scale(0.95); /* 缩小效果 */
+}
+
+/* 按钮获得焦点时的效果 */
+#toggle-footer:focus {
+  outline: none; /* 去除按钮点击时的默认边框 */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* 添加阴影 */
+}
+
+
+
+
+.header-section {
+    text-align: center;
+    margin: 80px 0;
+    padding: 10px 20px;
+    background-color: #f0f0f0; /* 浅灰背景 */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.header-section h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: #333;
+}
+.header-section p {
+    font-size: 16px;
+    color: #666;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* 地图容器样式 */
+#map {
+    height: 800px; /* 设置地图高度 */
+    width: 100%;
+    max-width: 2000px; /* 限制最大宽度 */
+    margin: 20px auto; /* 居中显示 */
+    border: 1px solid #ccc; /* 添加边框 */
+    border-radius: 8px; /* 圆角效果 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+}
+
+/* 响应式调整 */
+@media screen and (max-width: 768px) {
+    #map {
+        width: 90%; /* 小屏幕上地图宽度变窄 */
+        height: 500px; /* 地图高度减小 */
+    }
+
+    nav.main-nav {
+        flex-direction: column; /* 导航栏在小屏幕上堆叠 */
+    }
+
+    nav.main-nav .nav-links {
+        flex-direction: column; /* 垂直排列 */
+        align-items: center;
+        gap: 10px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    h1 {
+        font-size: 20px; /* 小屏幕上标题字体变小 */
+    }
+
+    #map {
+        height: 400px; /* 小屏幕高度进一步减小 */
+    }
+}
+
+
+.statistics-section {
+    text-align: center;
+    padding: 20px 10px;
+    background-color: #fff;
+    margin: 20px auto;
+}
+
+.statistics-section h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.stats-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.stat-box {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    text-align: center;
+}
+
+.stat-box h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #007bff;
+}
+
+.stat-box p {
+    font-size: 14px;
+    margin: 5px 0;
+    color: #555;
+}

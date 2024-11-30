@@ -1,0 +1,345 @@
+/* 态势感知页样式 */
+#situation {
+    min-height: 100vh;
+}
+
+.main-content {
+    padding: 30px;
+    min-height: 100vh;
+    margin-top: 100px; 
+}
+
+/* 按钮容器样式 */
+.situation-buttons {
+    position: fixed;
+    left: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: grid;  /* 默认隐藏 */
+    grid-template-columns: repeat(1,minmax(100px,2fr));
+    gap: 15px;
+    z-index: 100;
+}
+
+/* 按钮样式 */
+.situation-btn {
+    padding: 12px 24px;
+    font-size: 16px;
+    background-color: rgba(255, 255, 255, 0.9);  /* 半透明白色背景 */
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #333;
+    font-weight: 500;
+    min-width: 120px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    ;
+}
+
+.situation-btn:hover {
+    background-color: #fff;
+    transform: translateX(5px);  /* 悬停时略微向右移动 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.situation-btn.active {
+    background-color: #fff;
+    color: #000;
+    border-left: 4px solid #333;
+    font-weight: bold;
+    transform: translateX(5px);
+}
+
+.map-container{
+    width: 80%  ;
+    height: 100%;
+}
+
+
+/*左侧导航栏*/
+#situation {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .navbar {
+    position: fixed;
+    top: -100px;
+    left: 0;
+    width: 100%;
+    background-color: rgb(255, 255, 255); /* 半透明背景 */
+    color: white;
+    padding: 10px 0;
+    z-index: 1000;
+    transition: top 0.3s;
+  }
+  
+  .navbar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .navbar li {
+    padding: 20px;
+  }
+  
+  .navbar a {
+    color: rgba(255, 255, 255, 0.372);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+  
+  .navbar a:hover {
+    color: #ddd;
+  }
+  
+  .section {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+  }
+  
+  /* 响应式设计 */
+  @media (max-width: 768px) {
+    .navbar ul {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .navbar li {
+      padding: 10px 0;
+    }
+  }
+  
+  /* 导航栏隐藏时的样式 */
+  .navbar-hidden {
+    top: -100px; /* 初始隐藏 */
+  }
+  
+  /* 添加一些动画效果 */
+  @keyframes slideDown {
+    from {
+      top: -100px;
+    }
+    to {
+      top: 0;
+    }
+  }
+  
+  @keyframes slideUp {
+    from {
+      top: 0;
+    }
+    to {
+      top: -100px;
+    }
+  }
+
+main {
+  flex: 1; /* 主体内容自动撑满页面剩余空间 */
+}
+
+/* 背景容器样式 */
+.background-image {
+  position: fixed;
+  top: 80px; /* 导航栏下方开始 */
+  left: 0;
+  width: 100%;
+  z-index: 0; /* 确保背景在所有内容下方 */
+  overflow: hidden; /* 隐藏超出部分 */
+}
+
+
+/* 背景图片动画初始状态 */
+.bg-image {
+  opacity: 0; /* 初始透明度为0 */
+  transform: translateY(20px) scale(1); /* 初始位置向下移动，缩放为1 */
+  transition: opacity 1.5s ease, transform 1.5s ease; /* 逐渐过渡效果 */
+}
+
+/* 加载时显示效果 */
+.bg-image.show {
+  opacity: 1; /* 渐显效果 */
+  transform: translateY(0) scale(1); /* 回到原位置 */
+}
+
+
+
+
+
+/* 设置整个页面和主体内容布局 */
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 页脚样式 */
+footer {
+  background-color: #ffffff; /* 设置白色背景 */
+  padding: 15px 0;
+  font-size: 14px;
+  color: #666;
+  position: relative; /* 保持 footer 在文档流中 */
+  width: 100%;
+  margin-top: auto; /* 让 footer 自动位于页面底部 */
+  z-index: 10; /* 确保 footer 位于背景图上方 */
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* 添加轻微阴影以分隔 footer */
+}
+
+/* 页脚内容布局 */
+.footer-content {
+  display: flex;
+  flex-direction: column; /* 使内容和按钮垂直排列 */
+  align-items: center;
+  width: 100%;
+  max-width: 1800px;
+  margin: 0 auto;
+}
+
+/* 页脚主区域，默认折叠状态 */
+.footer-main {
+  max-height: none; /* 展开状态显示所有内容 */
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 100%;
+  transition: max-height 0.3s ease; /* 添加展开收起的动画效果 */
+}
+
+/* 默认折叠状态 */
+.footer-main.collapsed {
+  max-height: 30px; /* 控制默认展示的高度 */
+  overflow: hidden;
+}
+
+/* 各个页脚 section 样式 */
+.footer-section {
+  flex: 1;
+  min-width: 230px; /* 每个 section 的最小宽度 */
+  padding: 10px;
+  text-align: left;
+}
+
+/* 页脚 section 标题样式 */
+.footer-section h3 {
+  font-size: 10px;
+  margin-bottom: 10px;
+  color: #333; /* 标题颜色 */
+}
+
+/* 页脚列表样式 */
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section ul li {
+  margin: 5px 0;
+}
+
+.footer-section ul li a {
+  color: #666; /* 链接颜色 */
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-section ul li a:hover {
+  color: #007bff; /* 鼠标悬停时的颜色 */
+}
+
+/* 页脚底部版权信息 */
+.footer-bottom {
+  text-align: center;
+  margin-top: 7px;
+  font-size: 7px;
+  color: #999;
+}
+
+/* 展开/收起按钮样式 */
+#toggle-footer {
+  background-color: #007bff; /* 按钮背景颜色 */
+  color: #ffffff; /* 按钮文字颜色 */
+  border: none;
+  border-radius: 5px; /* 圆角边框 */
+  cursor: pointer;
+  padding: 8px 16px; /* 内边距 */
+  font-size: 14px;
+  margin-top: 10px;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* 悬停和点击效果 */
+}
+
+/* 悬停时的效果 */
+#toggle-footer:hover {
+  background-color: #0056b3; /* 加深背景颜色 */
+  transform: scale(1.05); /* 放大效果 */
+}
+
+/* 点击时的效果 */
+#toggle-footer:active {
+  background-color: #004080; /* 更深的背景颜色 */
+  transform: scale(0.95); /* 缩小效果 */
+}
+
+/* 按钮获得焦点时的效果 */
+#toggle-footer:focus {
+  outline: none; /* 去除按钮点击时的默认边框 */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* 添加阴影 */
+}
+
+
+
+
+
+.info-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.card {
+  background: rgb(0, 0, 0);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  opacity: 0; /* 初始透明度为0 */
+  transform: translateY(20px) scale(1); /* 初始位置向下移动，并设置初始缩放为1 */
+  transition: opacity 1.5s ease, transform 1.5s ease, box-shadow 0.3s ease; /* 设置所有过渡效果 */
+}
+
+/* 在页面加载时应用动画 */
+.card.show {
+  opacity: 1; /* 透明度逐渐变为1 */
+  transform: translateY(0) scale(1); /* 回到原位并保持缩放为1 */
+}
+
+/* 悬停时的放大效果 */
+.card:hover {
+  transform: translateY(0) scale(1.05); /* 保持位置不变并放大5% */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* 增加阴影以突出卡片 */
+}
+
+/* 初始状态设置 */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px); /* 向下位移一点，增加视觉效果 */
+  transition: opacity 2s ease, transform 2s ease; /* 设置渐变效果 */
+}
+
+/* 加载时显示效果 */
+.fade-in.show {
+  opacity: 1;
+  transform: translateY(0); /* 回到原位置 */
+}

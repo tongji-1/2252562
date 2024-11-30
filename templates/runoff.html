@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>校园内涝态势感知 - 积水径流</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/situation.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+</head>
+
+<body>
+    <!-- 顶部导航栏 -->
+    <nav class="main-nav">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='assets/logo01.png') }}" alt="校园内涝态势感知系统">
+            <span>校园内涝态势感知</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('home') }}" class="active">首页</a></li>
+    
+            <!-- 态势感知导航项，包含下拉菜单 -->
+            <li class="dropdown">
+                <a href="{{ url_for('situation') }}">态势感知</a>
+                <ul class="dropdown-content">
+                    <li><a href="{{ url_for('research') }}">研究区域</a></li>
+                    <li><a href="{{ url_for('meteorology') }}">气象水文</a></li>
+                    <li><a href="{{ url_for('runoff') }}">积水径流</a></li>
+                    <li><a href="{{ url_for('drainage') }}">雨污排水</a></li>
+                </ul>
+            </li>
+    
+            <li><a href="{{ url_for('forecast') }}">预报预警</a></li>
+            <li><a href="{{ url_for('analysis') }}">应急联动</a></li>
+            <li><a href="{{ url_for('user') }}">用户中心</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="header-info" class="header-section">
+            <h1>积水径流 - 同济大学四平路校区</h1>
+            <p>此页面展示了积水径流的实时动态信息，通过下方的交互式地图，您可以查看标注点详情。</p>
+        </section>
+        
+        <section id="situation" class="monitoring-section fade-in">
+          <!-- 地图容器 -->
+            <div id="map-runoff"></div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-content">
+            <!-- 主要内容区域 -->
+            <div class="footer-main">
+                <!-- 新手入门 -->
+                <div class="footer-section">
+                    <h3>新手入门</h3>
+                    <ul>
+                        <li><a href="/products">产品与服务</a></li>
+                        <li><a href="/solutions">解决方案</a></li>
+                        <li><a href="/docs">开发文档</a></li>
+                    </ul>
+                </div>
+
+                <!-- 商务合作 -->
+                <div class="footer-section">
+                    <h3>技术支持</h3>
+                    <ul>
+                        <li><a href="https://civileng.tongji.edu.cn/main.htm">土木工程学院</a></li>
+                        <li><a href="https://geotec.tongji.edu.cn/main.htm">土木工程信息化</a></li>
+                        <li><a href="https://geotec.tongji.edu.cn/ry/main.htm">课题组</a></li>
+                    </ul>
+                </div>
+
+                <!-- 常见问题 -->
+                <div class="footer-section">
+                    <h3>常见问题</h3>
+                    <ul>
+                        <li><a href="/faq">常见问题汇总</a></li>
+                        <li><a href="/privacy">隐私权政策</a></li>
+                        <li><a href="/account">账号问题</a></li>
+                        <li><a href="/refund">定位反馈</a></li>                            
+                        <li><a href="/agreement">服务协议</a></li>                            
+                        <li><a href="/disclaimer">免责声明</a></li>
+                        <li><a href="/logout">数据退出</a></li>
+                    </ul>
+                </div>
+
+                <!-- 开放平台 -->
+                <div class="footer-section">
+                    <h3>开放平台</h3>
+                    <ul>
+                        <li><a href="/is3">IS3</a></li>
+                    </ul>
+                        
+                    <h3>关注我们</h3>
+                    <ul> 
+                        <li><a href="/">微博</a></li>
+                        <li><a href="/">小红书</a></li>
+                        <li><a href="/">B站</a></li>
+                        <li><a href="/">知乎</a></li>
+                    </ul>
+                       
+                
+                    </div>
+                </div>
+            </div>
+
+            <!-- 版权信息 -->
+            <div class="footer-bottom">
+                <div class="copyright">
+                    © 2024-2024 tiaozhanbeitj.com 版权所有 | ？？？？？ | ？？？？？
+                </div>
+                <div class="beian">
+                    <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">################备案</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+        <!-- 引入 Leaflet.js 脚本 -->
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+        <!-- 自定义地图逻辑 -->
+        <script src="{{ url_for('static', filename='scripts/map-runoff.js') }}"></script>
+</body>
+</html>

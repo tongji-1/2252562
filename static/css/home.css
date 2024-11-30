@@ -1,0 +1,240 @@
+/* 首页特定样式 */
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 1;
+}
+
+.background-overlay img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.3;
+}
+
+.monitoring-section {
+    margin-top: 80px;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 80px auto 0;
+}
+
+.info-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.card {
+    background: rgb(0, 0, 0);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0; /* 初始透明度为0 */
+    transform: translateY(20px) scale(1); /* 初始位置向下移动，并设置初始缩放为1 */
+    transition: opacity 1.5s ease, transform 1.5s ease, box-shadow 0.3s ease; /* 设置所有过渡效果 */
+}
+
+/* 在页面加载时应用动画 */
+.card.show {
+    opacity: 1; /* 透明度逐渐变为1 */
+    transform: translateY(0) scale(1); /* 回到原位并保持缩放为1 */
+}
+
+/* 悬停时的放大效果 */
+.card:hover {
+    transform: translateY(0) scale(1.05); /* 保持位置不变并放大5% */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* 增加阴影以突出卡片 */
+}
+
+
+.risk-indicator {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+.risk-indicator.high {
+    background: var(--danger-color);
+    color: rgb(219, 33, 33);
+}
+.risk-indicator.low {
+    background: var(--success-color);
+    color: rgb(2, 240, 81);
+}
+
+.weather-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 1rem;
+}
+
+.temperature {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+main {
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    z-index: 2;
+}
+
+main {
+    flex: 1; /* 主体内容自动撑满页面剩余空间 */
+}
+
+/* 背景容器样式 */
+.background-image {
+    position: fixed;
+    top: 80px; /* 导航栏下方开始 */
+    left: 0;
+    width: 100%;
+    z-index: -1; /* 确保背景在所有内容下方 */
+    overflow: hidden; /* 隐藏超出部分 */
+}
+
+/* 图片样式 */
+.background-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 保证宽度全覆盖，高度裁剪 */
+    opacity: 0.5; /* 设置透明度 */
+}
+
+/* 设置整个页面和主体内容布局 */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 主体内容区域 */
+main {
+    flex: 1; /* 主体内容自动撑满页面剩余空间 */
+}
+
+/* 页脚样式 */
+footer {
+    background-color: #ffffff; /* 设置白色背景 */
+    padding: 15px 0;
+    font-size: 14px;
+    color: #666;
+    position: relative; /* 保持 footer 在文档流中 */
+    width: 100%;
+    margin-top: auto; /* 让 footer 自动位于页面底部 */
+    z-index: 10; /* 确保 footer 位于背景图上方 */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* 添加轻微阴影以分隔 footer */
+}
+
+/* 页脚内容布局 */
+.footer-content {
+    display: flex;
+    flex-direction: column; /* 使内容和按钮垂直排列 */
+    align-items: center;
+    width: 100%;
+    max-width: 1800px;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+/* 页脚主区域，默认折叠状态 */
+.footer-main {
+    max-height: none; /* 展开状态显示所有内容 */
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 100%;
+    transition: max-height 0.3s ease; /* 添加展开收起的动画效果 */
+}
+
+/* 默认折叠状态 */
+.footer-main.collapsed {
+    max-height: 30px; /* 控制默认展示的高度 */
+    overflow: hidden;
+}
+
+/* 各个页脚 section 样式 */
+.footer-section {
+    flex: 1;
+    min-width: 230px; /* 每个 section 的最小宽度 */
+    padding: 10px;
+    text-align: left;
+}
+
+/* 页脚 section 标题样式 */
+.footer-section h3 {
+    font-size: 10px;
+    margin-bottom: 10px;
+    color: #333; /* 标题颜色 */
+}
+
+/* 页脚列表样式 */
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section ul li {
+    margin: 5px 0;
+}
+
+.footer-section ul li a {
+    color: #666; /* 链接颜色 */
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section ul li a:hover {
+    color: #007bff; /* 鼠标悬停时的颜色 */
+}
+
+/* 页脚底部版权信息 */
+.footer-bottom {
+    text-align: center;
+    margin-top: 7px;
+    font-size: 7px;
+    color: #999;
+}
+
+/* 展开/收起按钮样式 */
+#toggle-footer {
+    background-color: #007bff; /* 按钮背景颜色 */
+    color: #ffffff; /* 按钮文字颜色 */
+    border: none;
+    border-radius: 5px; /* 圆角边框 */
+    cursor: pointer;
+    padding: 8px 16px; /* 内边距 */
+    font-size: 14px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* 悬停和点击效果 */
+}
+
+/* 悬停时的效果 */
+#toggle-footer:hover {
+    background-color: #0056b3; /* 加深背景颜色 */
+    transform: scale(1.05); /* 放大效果 */
+}
+
+/* 点击时的效果 */
+#toggle-footer:active {
+    background-color: #004080; /* 更深的背景颜色 */
+    transform: scale(0.95); /* 缩小效果 */
+}
+
+/* 按钮获得焦点时的效果 */
+#toggle-footer:focus {
+    outline: none; /* 去除按钮点击时的默认边框 */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* 添加阴影 */
+}

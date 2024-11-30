@@ -1,0 +1,462 @@
+:root {
+    --primary-color: #1a73e8;
+    --secondary-color: #4285f4;
+    --danger-color: #dc3545;
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+    --text-color: #333;
+    --bg-color: #f8f9fa;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Microsoft YaHei', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+    background-color: var(--bg-color);
+}
+
+
+/* 容器样式 */
+#flex-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* 导航栏样式 */
+.main-nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: transparent;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-links a {
+    position: relative;
+    color: #333;
+    text-decoration: none;
+    padding: 5px 15px;
+    transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #007bff;  /* 可以根据需要调整颜色 */
+}
+
+.nav-links a.active {
+    color: #007bff;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #007bff;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+
+html {
+    scroll-behavior: smooth; /* 添加平滑滚动效果 */
+}
+
+.section {
+    min-height: 100vh; /* 确保每个部分至少占满一个视口高度 */
+    padding: 20px;
+}
+
+/* 首页背景图样式 */
+#home {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 修改背图片容器样式 */
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.background-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0.5;
+}
+
+/* 修改内容容器样式 */
+.content-wrapper {
+    position: absolute;
+    z-index: 2;
+    text-align: center;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+}
+
+.content-wrapper h1 {
+    color: #000000;
+    font-size: 48px;
+}
+
+.hero-description {
+    font-size: 1.2em;
+    color: #fff;
+    line-height: 1.8;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* 信息卡片容器 */
+.info-cards {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+    width: 100%;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    z-index: 2;
+}
+
+/* 单个卡片样式 */
+.card {
+    background-color: #fff !important;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+    text-align: center;
+}
+
+/* 风险等级指示器 */
+.risk-indicator {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #27ae60;  /* 绿色表示低风险 */
+}
+
+/* 天气信息 */
+.weather-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.temperature {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+}
+
+.description {
+    color: #090909;
+}
+
+.main-nav .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.main-nav .logo img {
+    height: 40px;
+    width: auto;
+}
+
+.main-nav .logo span {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+}
+
+/* 调整监测部分的高度和定位 */
+.monitoring-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* 添加平滑滚动效果 */
+html {
+    scroll-behavior: smooth;
+}
+
+/* 确保页面容器有足够的高度以支持滚动 */
+.page {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 在首页隐藏返回顶部按钮 */
+#home .to-top,
+body[data-page="home"] .to-top {
+    display: none !important;
+}
+
+/* 地图容器样式 */
+#container {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    z-index: 1;
+}
+
+/* 确保按钮在地图上层 */
+.situation-buttons {
+    position: fixed;
+    z-index: 2;
+}
+
+/* 地图容器样式 */
+#heatmap {
+    width: 80%;
+    height: 80vh;
+    position: relative;
+    z-index: 1;
+    margin: 80px auto 20px auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 确保按钮在地图上层且位置正确 */
+.situation-buttons {
+    position: fixed;
+    z-index: 2;
+    top: 80px;
+}
+
+/* 态势感知页面容器 */
+#situation {
+    padding: 60px 20px 20px 20px;
+    background-color: #f5f5f5;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* 添加section之间的间距 */
+section + section {
+    margin-top: 100px;
+}
+
+/* 导航链接的过渡效果 */
+.nav-links a {
+    transition: all 0.3s ease;
+}
+
+ /* 激活状态的样式 */
+
+
+/* 页面基础样式 */
+.page {
+    min-height: 100vh;
+    padding: 60px 20px 20px;  /* 为导航栏留出空间 */
+    scroll-margin-top: 60px;  /* 防止锚点定位被导航栏遮挡 */
+}
+
+/* 显示状态的页面样式 */
+.page.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 导航链接样式 */
+.nav-links a {
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+/* 返回顶部按钮样式 */
+.back-to-top {
+    position: fixed;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 45px;
+    height: 120px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 25px;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);  /* 平滑过渡 */
+    z-index: 1000;
+    padding: 12px 0;
+    border: 1px solid rgba(128, 128, 128, 0.3);
+    overflow: hidden;  /* 确保光效不溢出 */
+}
+
+/* 悬浮效果 */
+.back-to-top:hover {
+    background-color: rgba(128, 128, 128, 0.25);  /* 稍微加深背景 */
+    transform: translateY(-50%) translateX(-3px);  /* 轻微左移 */
+    border-color: rgba(128, 128, 128, 0.4);  /* 边框加深 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);  /* 添加轻微阴影 */
+}
+
+/* 图标和文字的悬浮效果 */
+.back-to-top:hover i,
+.back-to-top:hover .text-container span {
+    color: #444;  /* 文字加深 */
+}
+
+/* 上箭头图标样式 */
+.back-to-top i {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    transition: all 0.3s ease;  /* 添加过渡效果 */
+}
+
+/* 文字容器样式 */
+.back-to-top .text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+}
+
+/* TO TOP 文字样式 */
+.back-to-top .text-container span {
+    color: #666;
+    font-size: 11px;
+    line-height: 1.4;
+    font-weight: normal;
+    text-transform: uppercase;
+    display: inline-block;
+    transition: all 0.3s ease;  /* 添加过渡效果 */
+}
+
+/* 添加点击效果 */
+.back-to-top:active {
+    transform: translateY(-50%) translateX(-1px);  /* 轻微回弹 */
+    background-color: rgba(128, 128, 128, 0.3);  /* 点击时加深 */
+}
+
+/* 显示按钮的类 */
+.back-to-top.show {
+    display: flex;
+}
+
+/* 悬停效果 - 保持轻微 */
+.back-to-top:hover {
+    background-color: rgb(255, 255, 255);
+    transform: translateY(-50%) translateX(-3px);
+    border-color: rgba(128, 128, 128, 0.4);
+    box-shadow: 
+        5px 5px 10px rgba(0, 0, 0, 0.1),    /* 主阴影 */
+        15px 15px 20px rgba(0, 0, 0, 0.05);  /* 扩散阴影 */
+}
+
+/* 在首页隐藏返回顶部按钮 */
+#home .back-to-top {
+    display: none !important;
+}
+
+/* 间隔页面样式 */
+.spacer {
+    min-height: 120vh;  /* 全高度 */
+    background-color: #f5f5f5;  /* 可以设置一个浅色背景 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 确保所有页面都是全屏高度 */
+.page {
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+}
+
+/* 返回顶部按钮在间隔页面显示 */
+#spacer .back-to-top {
+    display: none !important;  /* 确保在间隔页面不显示返回顶部按钮 */
+}
+
+/* 样式：隐藏下拉内容 */
+.nav-links .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* 样式：设置下拉项 */
+.nav-links .dropdown-content li {
+    display: block;
+    padding: 8px 16px;
+}
+
+.nav-links .dropdown-content li a {
+    color: black;
+    text-decoration: none;
+}
+
+/* 样式：鼠标悬停显示下拉内容 */
+.nav-links .dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* 鼠标悬停在下拉项时改变背景色 */
+.nav-links .dropdown-content li:hover {
+    background-color: #ddd;
+}
+
+
+

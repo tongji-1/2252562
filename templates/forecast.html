@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>校园内涝态势感知 - 预报预警</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/forecast.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+</head>
+
+<body>
+    <!-- 顶部导航栏 -->
+    <nav class="main-nav">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='assets/logo01.png') }}" alt="校园内涝态势感知系统">
+            <span>校园内涝态势感知</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('home') }}" class="active">首页</a></li>
+    
+            <!-- 态势感知导航项，包含下拉菜单 -->
+            <li class="dropdown">
+                <a href="{{ url_for('situation') }}">态势感知</a>
+                <ul class="dropdown-content">
+                    <li><a href="{{ url_for('research') }}">研究区域</a></li>
+                    <li><a href="{{ url_for('meteorology') }}">气象水文</a></li>
+                    <li><a href="{{ url_for('runoff') }}">积水径流</a></li>
+                    <li><a href="{{ url_for('drainage') }}">雨污排水</a></li>
+                </ul>
+            </li>
+    
+            <li><a href="{{ url_for('forecast') }}">预报预警</a></li>
+            <li><a href="{{ url_for('analysis') }}">应急联动</a></li>
+            <li><a href="{{ url_for('user') }}">用户中心</a></li>
+        </ul>
+    </nav>
+
+    <!-- 主要内容区域 -->
+    <main>
+        <section id="forecast" class="page">
+            <h2>预报预警 - 数据分析</h2>
+    
+            <!-- 占位符或加载中的提示 -->
+            <div id="loading-spinner" class="spinner"></div>
+            <div id="placeholder">点击按钮开始分析</div>
+    
+            <button id="analyzeButton">开始分析</button>
+    
+            <div id="results">
+                <h3>模型分析结果</h3>
+                <p><strong>训练集准确率：</strong><span id="train_acc"></span></p>
+                <p><strong>测试集准确率：</strong><span id="test_acc"></span></p>
+                <h4>分类报告：</h4>
+                <pre id="class_report"></pre>
+    
+                <h4>混淆矩阵：</h4>
+                <img id="cm_img" src="" alt="Confusion Matrix" style="max-width: 600px;">
+    
+                <h4>ROC曲线：</h4>
+                <img id="roc_img" src="" alt="ROC Curve" style="max-width: 600px;">
+    
+                <h4>特征重要性：</h4>
+                <img id="feature_importance_img" src="" alt="Feature Importance" style="max-width: 600px;">
+            </div>
+        </section>
+    </main>
+    
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-content">
+            <!-- 主要内容区域 -->
+            <div class="footer-main">
+                <!-- 新手入门 -->
+                <div class="footer-section">
+                    <h3>新手入门</h3>
+                    <ul>
+                        <li><a href="/products">产品与服务</a></li>
+                        <li><a href="/solutions">解决方案</a></li>
+                        <li><a href="/docs">开发文档</a></li>
+                    </ul>
+                </div>
+
+                <!-- 商务合作 -->
+                <div class="footer-section">
+                    <h3>技术支持</h3>
+                    <ul>
+                        <li><a href="https://civileng.tongji.edu.cn/main.htm">土木工程学院</a></li>
+                        <li><a href="https://geotec.tongji.edu.cn/main.htm">土木工程信息化</a></li>
+                        <li><a href="https://geotec.tongji.edu.cn/ry/main.htm">课题组</a></li>
+                    </ul>
+                </div>
+
+                <!-- 常见问题 -->
+                <div class="footer-section">
+                    <h3>常见问题</h3>
+                    <ul>
+                        <li><a href="/faq">常见问题汇总</a></li>
+                        <li><a href="/privacy">隐私权政策</a></li>
+                        <li><a href="/account">账号问题</a></li>
+                        <li><a href="/refund">定位反馈</a></li>                            
+                        <li><a href="/agreement">服务协议</a></li>                            
+                        <li><a href="/disclaimer">免责声明</a></li>
+                        <li><a href="/logout">数据退出</a></li>
+                    </ul>
+                </div>
+
+                <!-- 开放平台 -->
+                <div class="footer-section">
+                    <h3>开放平台</h3>
+                    <ul>
+                        <li><a href="/is3">IS3</a></li>
+                    </ul>
+                        
+                    <h3>关注我们</h3>
+                    <ul> 
+                        <li><a href="/">微博</a></li>
+                        <li><a href="/">小红书</a></li>
+                        <li><a href="/">B站</a></li>
+                        <li><a href="/">知乎</a></li>
+                    </ul>
+                       
+                
+                    </div>
+                </div>
+            </div>
+
+            <!-- 版权信息 -->
+            <div class="footer-bottom">
+                <div class="copyright">
+                    © 2024-2024 tiaozhanbeitj.com 版权所有 | ？？？？？ | ？？？？？
+                </div>
+                <div class="beian">
+                    <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">################备案</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // AJAX请求开始分析
+        $(document).ready(function() {
+            $("#analyzeButton").click(function() {
+                // 显示加载中的旋转器和隐藏占位符
+                $('#loading-spinner').show();
+                $('#placeholder').hide();
+                $('#results').hide(); // 隐藏结果区域（以防旧数据未清除）
+    
+                // 发起AJAX请求
+                $.ajax({
+                    url: '/analyze',  // 假设这是你的后端分析接口
+                    type: 'GET',
+                    success: function(response) {
+                        // 显示训练和测试准确率
+                        $('#train_acc').text(response.train_acc.toFixed(4));
+                        $('#test_acc').text(response.test_acc.toFixed(4));
+    
+                        // 显示分类报告
+                        $('#class_report').text(JSON.stringify(response.class_report, null, 4));
+    
+                        // 更新图像
+                        $('#cm_img').attr('src', 'data:image/png;base64,' + response.cm_url);
+                        $('#roc_img').attr('src', 'data:image/png;base64,' + response.roc_url);
+                        $('#feature_importance_img').attr('src', 'data:image/png;base64,' + response.feature_importance_url);
+    
+                        // 隐藏加载中的旋转器
+                        $('#loading-spinner').hide();
+    
+                        // 显示结果区域
+                        $('#results').show();
+                    },
+                    error: function(xhr, status, error) {
+                        // 错误处理
+                        alert('分析请求失败！');
+                        $('#loading-spinner').hide(); // 隐藏加载中的旋转器
+                        $('#placeholder').text('分析失败，请稍后再试。').show(); // 显示失败提示
+                    }
+                });
+            });
+        });
+    </script>
+    
+
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>校园内涝态势感知 - 用户中心</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+</head>
+
+<body>
+    <!-- 顶部导航栏 -->
+    <nav class="main-nav">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='assets/logo01.png') }}" alt="校园内涝态势感知系统">
+            <span>校园内涝态势感知</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('home') }}" class="active">首页</a></li>
+    
+            <!-- 态势感知导航项，包含下拉菜单 -->
+            <li class="dropdown">
+                <a href="{{ url_for('situation') }}">态势感知</a>
+                <ul class="dropdown-content">
+                    <li><a href="{{ url_for('research') }}">研究区域</a></li>
+                    <li><a href="{{ url_for('meteorology') }}">气象水文</a></li>
+                    <li><a href="{{ url_for('runoff') }}">积水径流</a></li>
+                    <li><a href="{{ url_for('drainage') }}">雨污排水</a></li>
+                </ul>
+            </li>
+    
+            <li><a href="{{ url_for('forecast') }}">预报预警</a></li>
+            <li><a href="{{ url_for('analysis') }}">应急联动</a></li>
+            <li><a href="{{ url_for('user') }}">用户中心</a></li>
+        </ul>
+    </nav>
+
+    <!-- 主要内容区域 -->
+
+    <main class="main-content fadeInFromCenter">
+        <!-- 操作指南区域 -->
+     <!-- 背景图片 -->
+    <div class="background-image">
+        <img src="{{ url_for('static', filename='assets/campus-siping.png') }}" alt="检测背景">
+    </div>
+        <aside class="faq-section">
+            <h2>操作指南</h2>
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false" onclick="toggleAnswer(this)">如何查看内涝预警信息？</button>
+                <div class="faq-answer">点击导航栏中的“预报预警”查看最新预警。</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false" onclick="toggleAnswer(this)">系统如何分析积水情况？</button>
+                <div class="faq-answer">系统通过收集气象和水文数据实时分析积水态势。</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false" onclick="toggleAnswer(this)">如何处理紧急内涝情况？</button>
+                <div class="faq-answer">在“应急联动”页面查看具体措施和联系方法。</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false" onclick="toggleAnswer(this)">如何反馈问题？</button>
+                <div class="faq-answer">可以在此页面的对话框中向AI询问，或联系技术支持。</div>
+            </div>
+            
+        </aside>
+
+        <!-- 聊天界面 -->
+        <section id="user" class="chat-section">
+            <div class="chat-ai">
+                <h2>对话框</h2>
+                
+
+<!-- 聊天显示区域 -->
+<div id="chat-display" class="chat-display">
+    <!-- AI 欢迎语 -->
+    <div class="ai-message">
+        <span class="ai-label">平台助手：</span>
+        <p>您好，欢迎使用校园内涝态势感知平台用户中心！我是您的智能助手，很高兴为您服务。</p>
+        <p>您可以通过以下方式开始体验：</p>
+        <ul>
+            <li>浏览监测结果，查看状态概况</li>
+            <li>获取健康评估和历史数据分析</li>
+            <li>了解平台功能或提交问题反馈</li>            
+        </ul>
+        <p>请告诉我，您需要什么帮助？</p>
+    </div>
+</div>
+</main>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-content">
+            <!-- 主要内容区域 -->
+            <div class="footer-main">
+                <!-- 新手入门 -->
+                <div class="footer-section">
+                    <h3>新手入门</h3>
+                    <ul>
+                        <li><a href="/products">产品与服务</a></li>
+                        <li><a href="/solutions">解决方案</a></li>
+                        <li><a href="/docs">开发文档</a></li>
+                    </ul>
+                </div>
+
+                <!-- 商务合作 -->
+                <div class="footer-section">
+                    <h3>技术支持</h3>
+                    <ul>
+                        <li><a href="https://civileng.tongji.edu.cn/main.htm">土木工程学院</a></li>
+                        <li><a href="https://geotec.tongji.edu.cn/main.htm">土木工程信息化</a></li>
+                        <li><a href="https://geotec.tongji.edu.cn/ry/main.htm">课题组</a></li>
+                    </ul>
+                </div>
+
+                <!-- 常见问题 -->
+                <div class="footer-section">
+                    <h3>常见问题</h3>
+                    <ul>
+                        <li><a href="/faq">常见问题汇总</a></li>
+                        <li><a href="/privacy">隐私权政策</a></li>
+                        <li><a href="/account">账号问题</a></li>
+                        <li><a href="/refund">定位反馈</a></li>                            
+                        <li><a href="/agreement">服务协议</a></li>                            
+                        <li><a href="/disclaimer">免责声明</a></li>
+                        <li><a href="/logout">数据退出</a></li>
+                    </ul>
+                </div>
+
+                <!-- 开放平台 -->
+                <div class="footer-section">
+                    <h3>开放平台</h3>
+                    <ul>
+                        <li><a href="/is3">IS3</a></li>
+                    </ul>
+                        
+                    <h3>关注我们</h3>
+                    <ul> 
+                        <li><a href="/">微博</a></li>
+                        <li><a href="/">小红书</a></li>
+                        <li><a href="/">B站</a></li>
+                        <li><a href="/">知乎</a></li>
+                    </ul>
+                       
+                
+                    </div>
+                </div>
+            </div>
+
+            <!-- 版权信息 -->
+            <div class="footer-bottom">
+                <div class="copyright">
+                    © 2024-2024 tiaozhanbeitj.com 版权所有 | ？？？？？ | ？？？？？
+                </div>
+                <div class="beian">
+                    <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">################备案</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="static/scripts/footerToggle.js"></script>
+    <script src="static/scripts/user.js"></script>
+    <script>
+        function toggleAnswer(element) {
+            const answer = element.nextElementSibling;
+            const isExpanded = element.getAttribute('aria-expanded') === 'true';
+            element.setAttribute('aria-expanded', !isExpanded);
+            answer.style.display = isExpanded ? 'none' : 'block';
+        }
+    </script>
+
+</body>
+</html>
+

@@ -1,0 +1,28 @@
+project/
+├── home.html             # 首页
+├── situation.html        # 态势感知主页面
+├── research.html         # 态势感知 - 研究区域页面
+├── meteorology.html      # 态势感知 - 气象水文页面
+├── runoff.html           # 态势感知 - 积水径流页面
+├── drainage.html         # 态势感知 - 雨污排水页面
+├── forecast.html         # 预报预警页面
+├── analysis.html         # 应急联动页面
+├── user.html             # 用户中心页面
+├── assets/               # 存放图片资源
+├── model/                # 模型分析
+└── styles/               # 样式文件夹
+
+
+your_project/
+├── app.py
+├── templates/
+│   ├── home.html
+│   ├── situation.html
+│   └── ...
+└── static/
+    ├── styles/
+    │   ├── main.css
+    │   └── analysis.css
+    └── assets/
+        ├── logo01.png
+        └── campus-siping.png

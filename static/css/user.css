@@ -1,0 +1,360 @@
+/* 主内容布局 */
+.main-content {
+    display: flex;
+    gap: 20px; /* 设置FAQ和聊天区域之间的间距 */
+    padding: 20px;
+
+}
+
+/* FAQ 区域 */
+.faq-section {
+    width: 30%; /* FAQ部分占页面的30% */
+    background-color: #f7faff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.faq-section h2 {
+    font-size: 35px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center; /* 设置居中对齐 */
+}
+
+.faq-item {
+    margin-bottom: 15px;
+}
+
+.faq-question {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background-color: transparent;
+    border: none;
+    font-size: 28px;
+    color: #333;
+    cursor: pointer;
+    padding: 8px 0;
+    transition: color 0.3s;
+    font-weight: bold;
+}
+
+.faq-question:hover {
+    color: #4CAF50;
+}
+
+.faq-answer {
+    font-size: 20px;
+    color: #666;
+    padding-left: 15px;
+    padding-top: 5px;
+    line-height: 1.6;
+    display: none;
+}
+
+/* 聊天区域 */
+.chat-section {
+    flex: 2;
+    max-width: 70%; /* 聊天部分占页面的70% */
+}
+
+.chat-ai {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* 聊天显示区域 */
+.chat-display {
+    height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* 滚动条样式 */
+.chat-display::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-display::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+}
+
+.chat-display::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+    border-radius: 4px;
+}
+
+/* 输入区域 */
+.input-area {
+    display: flex;
+    gap: 10px;
+}
+
+.input-area input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s;
+}
+
+.input-area input:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+.input-area button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.input-area button:hover {
+    background-color: #45a049;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.input-area button:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* 消息气泡样式 */
+.user-message, .ai-message {
+    margin: 8px 0;
+    padding: 10px 15px;
+    border-radius: 15px;
+    max-width: 70%;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 1.5;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 用户消息样式 */
+.user-message {
+    text-align: right;
+    background-color: #e1f7d5;
+    align-self: flex-end;
+    margin-left: auto;
+    border-radius: 15px 15px 0 15px;
+}
+
+/* AI 消息样式 */
+.ai-message {
+    text-align: left;
+    background-color: #f0f0f0;
+    align-self: flex-start;
+    margin-right: auto;
+    border-radius: 15px 15px 15px 0;
+}
+
+.ai-label {
+    font-weight: bold;
+    color: #007bff;
+    display: block;
+    margin-bottom: 5px;
+}
+
+ul {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+p {
+    margin: 5px 0;
+}
+
+
+
+
+/* 背景容器样式 */
+.background-image {
+    position: fixed;
+
+    left: 0;
+    width: 100%;
+    z-index: -1; /* 确保背景在所有内容下方 */
+    overflow: hidden; /* 隐藏超出部分 */
+}
+
+/* 图片样式 */
+.background-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 保证宽度全覆盖，高度裁剪 */
+    opacity: 0.5; /* 设置透明度 */
+}
+
+/* 设置整个页面和主体内容布局 */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 50px 0 0 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 主体内容区域 */
+main {
+    flex: 1; /* 主体内容自动撑满页面剩余空间 */
+}
+
+/* 页脚样式 */
+footer {
+    background-color: #ffffff; /* 设置白色背景 */
+    padding: 15px 0;
+    font-size: 14px;
+    color: #666;
+    position: relative; /* 保持 footer 在文档流中 */
+    width: 100%;
+    margin-top: auto; /* 让 footer 自动位于页面底部 */
+    z-index: 10; /* 确保 footer 位于背景图上方 */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* 添加轻微阴影以分隔 footer */
+}
+
+/* 页脚内容布局 */
+.footer-content {
+    display: flex;
+    flex-direction: column; /* 使内容和按钮垂直排列 */
+    align-items: center;
+    width: 100%;
+    max-width: 1800px;
+    margin: 0 auto;
+}
+
+/* 页脚主区域，默认折叠状态 */
+.footer-main {
+    max-height: none; /* 展开状态显示所有内容 */
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 100%;
+    transition: max-height 0.3s ease; /* 添加展开收起的动画效果 */
+}
+
+/* 默认折叠状态 */
+.footer-main.collapsed {
+    max-height: 30px; /* 控制默认展示的高度 */
+    overflow: hidden;
+}
+
+/* 各个页脚 section 样式 */
+.footer-section {
+    flex: 1;
+    min-width: 230px; /* 每个 section 的最小宽度 */
+    padding: 10px;
+    text-align: left;
+}
+
+/* 页脚 section 标题样式 */
+.footer-section h3 {
+    font-size: 10px;
+    margin-bottom: 10px;
+    color: #333; /* 标题颜色 */
+}
+
+/* 页脚列表样式 */
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section ul li {
+    margin: 5px 0;
+}
+
+.footer-section ul li a {
+    color: #666; /* 链接颜色 */
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section ul li a:hover {
+    color: #007bff; /* 鼠标悬停时的颜色 */
+}
+
+/* 页脚底部版权信息 */
+.footer-bottom {
+    text-align: center;
+    margin-top: 7px;
+    font-size: 7px;
+    color: #999;
+}
+
+/* 展开/收起按钮样式 */
+#toggle-footer {
+    background-color: #007bff; /* 按钮背景颜色 */
+    color: #ffffff; /* 按钮文字颜色 */
+    border: none;
+    border-radius: 5px; /* 圆角边框 */
+    cursor: pointer;
+    padding: 8px 16px; /* 内边距 */
+    font-size: 14px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* 悬停和点击效果 */
+}
+
+/* 悬停时的效果 */
+#toggle-footer:hover {
+    background-color: #0056b3; /* 加深背景颜色 */
+    transform: scale(1.05); /* 放大效果 */
+}
+
+/* 点击时的效果 */
+#toggle-footer:active {
+    background-color: #004080; /* 更深的背景颜色 */
+    transform: scale(0.95); /* 缩小效果 */
+}
+
+/* 按钮获得焦点时的效果 */
+#toggle-footer:focus {
+    outline: none; /* 去除按钮点击时的默认边框 */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* 添加阴影 */
+}
+
+/* 添加 CSS 动画 */
+@keyframes fadeInFromCenter {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* 应用动画到需要的元素 */
+.main-content, .background-image, .faq-section, .chat-section {
+    animation: fadeInFromCenter 1.5s ease-out;
+    transform-origin: center;
+    opacity: 0; /* 初始透明度 */
+    animation-fill-mode: forwards; /* 保持动画结束状态 */
+}

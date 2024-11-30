@@ -1,0 +1,128 @@
+/* 页脚样式 */
+footer {
+    background-color: #f5f5f5;
+    padding: 40px 0 20px;
+    font-size: 14px;
+    color: #666;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-main {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-section h3 {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 12px;
+}
+
+.footer-section ul li a {
+    color: #666;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section ul li a:hover {
+    color: #2a8ded;
+}
+
+/* 社交媒体图标 */
+.social-links h4 {
+    font-size: 14px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.social-icon {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.social-icon.wechat {
+    background-image: url('path/to/wechat-icon.png');
+}
+
+.social-icon.weibo {
+    background-image: url('path/to/weibo-icon.png');
+}
+
+/* 版权信息 */
+.footer-bottom {
+    padding-top: 20px;
+    border-top: 1px solid #e5e5e5;
+    text-align: center;
+    color: #999;
+}
+
+.copyright {
+    margin-bottom: 10px;
+}
+
+.beian a {
+    color: #999;
+    text-decoration: none;
+}
+
+/* 响应式布局 */
+@media (max-width: 768px) {
+    .footer-main {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-main {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+/* 媒体查询，适配移动端 */
+@media (max-width: 768px) {
+    .footer-links {
+        flex-direction: column;
+        padding: 0 20px;
+    }
+    
+    .footer-section {
+        margin-bottom: 30px;
+        text-align: center;
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
