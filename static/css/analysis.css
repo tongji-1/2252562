@@ -1,3 +1,82 @@
 #analysis{
     height: 100%;
 }
+
+/* 主要内容区域样式 */
+main {
+    font-family: Arial, sans-serif; /* 设置字体 */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* 设置最小高度为屏幕高度 */
+    background-color: #f4f4f4; /* 背景颜色 */
+}
+
+/* 分析页面区域 */
+#analysis.page {
+    width: 90%; /* 设置页面宽度 */
+    max-width: 1600px; /* 设置最大宽度 */
+    padding: 20px;
+    background-color: white; /* 背景色为白色 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+    border-radius: 8px; /* 圆角效果 */
+    margin-top: 30px;
+
+}
+
+/* 地址部分样式 */
+.gdmap {
+    text-align: center; /* 地址文本居中 */
+    margin-bottom: 20px;
+}
+
+.gdmap h2 {
+    font-size: 20px;
+    color: #333; /* 设置字体颜色 */
+    margin: 0;
+}
+
+/* 内容部分样式 */
+.content {
+    text-align: center; /* 地图标题居中 */
+}
+
+.content h2 {
+    font-size: 24px;
+    color: #007BFF; /* 设置标题颜色 */
+    margin-bottom: 20px; /* 标题下方间距 */
+}
+
+/* 地图容器样式 */
+#heatmap {
+    width: 100%;
+    height: 1000px;
+    border: 1px solid #ddd; /* 设置地图容器的边框颜色 */
+    border-radius: 8px; /* 地图容器圆角效果 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加地图容器的阴影 */
+}
+
+/* 响应式布局 */
+@media (max-width: 768px) {
+    main {
+        padding: 10px; /* 增加小屏幕时的内边距 */
+    }
+
+    #analysis.page {
+        width: 100%; /* 小屏幕时页面宽度为100% */
+    }
+
+    .gdmap h2 {
+        font-size: 18px; /* 小屏幕时，字体稍微缩小 */
+    }
+
+    .content h2 {
+        font-size: 20px; /* 小屏幕时，标题稍微缩小 */
+    }
+
+    #heatmap {
+        height: 400px; /* 小屏幕时，地图高度缩小 */
+    }
+}

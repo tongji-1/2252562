@@ -44,11 +44,12 @@
             </div>
             <div class="content">
                 <h2>内涝积水热点地图</h2>
-                <!-- 热点地图占位符 -->
+                <!-- 地图容器 -->
+                <div id="heatmap" ></div>
             </div>
         </section>
     </main>
-
+    
     <!-- 页脚 -->
     <footer>
         <div class="footer-content">
@@ -119,5 +120,12 @@
             </div>
         </div>
     </footer>
+
+
+        <!-- 引入高德地图API -->
+        <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=f42b05089589c56b35ded541d9b5dc90&plugin=heatmap"></script>
+
+         <!-- 引入自定义js 文件 -->
+        <script src="{{ url_for('static', filename='scripts/map-analysis.js') }}"></script>
 </body>
 </html>

@@ -2,7 +2,6 @@ import pymysql
 from flask import Flask, render_template, jsonify, request
 import json
 from static.model.MLq import FloodModel
-from static.scripts.hotspots_data import hotspots_data
 
 app = Flask(__name__)
 
@@ -135,7 +134,7 @@ def analyze():
 # 应急联动
 @app.route('/analysis')
 def analysis():
-    return render_template('analysis.html', hotspots_data=hotspots_data)
+    return render_template('analysis.html')
 
 # 用户中心
 @app.route('/user')
