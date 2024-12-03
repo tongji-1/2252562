@@ -32,7 +32,7 @@
     
             <li><a href="{{ url_for('forecast') }}">预报预警</a></li>
             <li><a href="{{ url_for('analysis') }}">应急联动</a></li>
-            <li><a href="{{ url_for('user') }}">用户中心</a></li>
+            <li><a href="{{ url_for('user') }}">帮助中心</a></li>
         </ul>
     </nav>
 
@@ -72,8 +72,7 @@
     <!-- 页脚 -->
     <footer>
         <div class="footer-content">
-            <!-- 主要内容区域 -->
-            <div class="footer-main">
+            <div class="footer-main collapsed" id="footer-main">
                 <!-- 新手入门 -->
                 <div class="footer-section">
                     <h3>新手入门</h3>
@@ -122,11 +121,13 @@
                         <li><a href="/">B站</a></li>
                         <li><a href="/">知乎</a></li>
                     </ul>
-                       
-                
-                    </div>
                 </div>
+
             </div>
+        </div>
+                   <!-- 展开/收起按钮 -->
+        <button id="toggle-footer" onclick="toggleFooter()">展开更多</button>
+    </div>
 
             <!-- 版权信息 -->
             <div class="footer-bottom">
@@ -137,8 +138,23 @@
                     <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">################备案</a>
                 </div>
             </div>
+
         </div>
     </footer>
+
+<script src="static/scripts/footerToggle.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const cards = document.querySelectorAll(".card");
+        cards.forEach((card, index) => {
+            setTimeout(() => {
+                card.classList.add("show");
+            }, index * 150); // 每个卡片延迟150ms依次显示
+        });
+    });
+</script>
+
 
     <script src="static/scripts/footerToggle.js"></script>
 
