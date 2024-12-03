@@ -2,7 +2,15 @@ import pymysql
 from flask import Flask, render_template, jsonify, request
 import json
 from static.model.MLq import FloodModel
+from flask import Flask, render_template, request, jsonify
+import base64
+import io
+import cv2
+import numpy as np
+from PIL import Image
+from static.model.segformer import SegFormer_Segmentation
 
+segformer = SegFormer_Segmentation()
 app = Flask(__name__)
 
 # 数据库初始化函数 (使用 pymysql)
@@ -131,6 +139,62 @@ def analyze():
     except Exception as e:
         return jsonify({"error": "Error occurred during analysis: " + str(e)}), 500
     
+# 图片预测接口
+@app.route('/predict-image', methods=['POST'])
+def predict_image():
+    if 'image' not in request.files:
+        return jsonify({'error': 'No file part'}), 400
+    
+    image_file = request.files['image']
+    if image_file.filename == '':
+        return jsonify({'error': 'No selected file'}), 400
+
+    try:
+        image = Image.open(image_file.stream)
+        result_image = segformer.detect_image(image)
+
+        # 将处理后的图片转为base64编码以便传输
+        buffered = io.BytesIO()
+        result_image.save(buffered, format="JPEG")
+        img_base64 = base64.b64encode(buffered.getvalue()).decode('utf-8')
+        
+        return jsonify({'image': img_base64})
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+# 视频处理接口
+@app.route('/process-video', methods=['POST'])
+def process_video():
+    if 'video' not in request.files:
+        return jsonify({'error': 'No file part'}), 400
+    
+    video_file = request.files['video']
+    if video_file.filename == '':
+        return jsonify({'error': 'No selected file'}), 400
+
+    try:
+        # 使用OpenCV处理视频
+        video_stream = video_file.stream
+        video_bytes = video_stream.read()
+        np_array = np.frombuffer(video_bytes, dtype=np.uint8)
+        frame = cv2.imdecode(np_array, cv2.IMREAD_COLOR)
+
+        # 转换成RGB后处理
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        frame_image = Image.fromarray(frame)
+        result_frame = np.array(segformer.detect_image(frame_image))
+
+        # 转回BGR格式并编码为视频流
+        result_frame = cv2.cvtColor(result_frame, cv2.COLOR_RGB2BGR)
+        _, buffer = cv2.imencode('.jpg', result_frame)
+        result_video = base64.b64encode(buffer).decode('utf-8')
+
+        return jsonify({'video': result_video})
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 # 应急联动
 @app.route('/analysis')
 def analysis():

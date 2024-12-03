@@ -246,3 +246,133 @@ body {
         padding: 12px 25px;
     }
 }
+
+
+
+/* 专门针对单张图片预测和视频实时检测的样式 */
+#image-prediction-section,
+#video-detection-section {
+    width: 1600px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    transition: box-shadow 0.3s ease;
+    height: 300px;
+}
+
+#image-prediction-section:hover,
+#video-detection-section:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+#image-prediction-section .upload-card,
+#video-detection-section .upload-card {
+    text-align: center;
+}
+
+#image-prediction-section h2,
+#video-detection-section h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.upload-label {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 8px;
+    display: inline-block;
+}
+
+.upload-input {
+    margin: 15px 0;
+    padding: 12px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 380px;
+    background-color: #fafafa;
+    transition: border-color 0.3s ease;
+}
+
+.upload-input:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+.upload-button {
+    padding: 14px 30px;
+    font-size: 18px;
+    color: white;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.upload-button:hover {
+    background-color: #45a049;
+    transform: translateY(-3px);
+}
+
+.upload-button:active {
+    background-color: #388e3c;
+    transform: translateY(1px);
+}
+
+.result {
+    margin-top: 20px;
+    color: #777;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    margin-top: 20px;
+    display: none;
+}
+
+.progress {
+    height: 100%;
+    width: 0;
+    background-color: #4CAF50;
+    border-radius: 8px;
+    transition: width 0.5s ease;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    #image-prediction-section,
+    #video-detection-section {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .upload-input {
+        width: 100%;
+    }
+
+    .upload-button {
+        width: 100%;
+        margin-top: 15px;
+    }
+}
+
+/* 调整按钮和输入框的大小 */
+@media (max-width: 480px) {
+    .upload-button {
+        font-size: 16px;
+        padding: 12px;
+    }
+
+    .upload-input {
+        font-size: 14px;
+        padding: 8px;
+    }
+}

@@ -88,12 +88,42 @@
                 <img src="{{ url_for('static', filename='assets/predict.png') }}" alt="预测过程">
                 <p class="image-caption">实时预测积水区域</p>
             </div>
-        
             <!-- 可选的CTA按钮 -->
             <div class="cta-button">
                 <a href="#">了解更多关于积水的技术细节</a>
             </div>
         </section>
+
+        <section id="image-prediction-section" class="upload-section">
+            <h2>单张图片预测</h2>
+            <div class="upload-card">
+                <label for="image-upload" class="upload-label">上传图片:</label>
+                <input type="file" id="image-upload" accept="image/*" title="选择要上传的图片" class="upload-input">
+                <button onclick="handleImageUpload()" class="upload-button">上传并分析</button>
+                <div id="image-result" class="result">
+                    <p>预测结果将显示在此处。</p>
+                </div>
+                <div id="image-upload-progress" class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="video-detection-section" class="upload-section">
+            <h2>视频实时检测</h2>
+            <div class="upload-card">
+                <label for="video-upload" class="upload-label">上传视频:</label>
+                <input type="file" id="video-upload" accept="video/*" title="选择要上传的视频" class="upload-input">
+                <button onclick="handleVideoUpload()" class="upload-button">上传并分析</button>
+                <div id="video-result" class="result">
+                    <p>实时视频处理将在此处显示。</p>
+                </div>
+                <div id="video-upload-progress" class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+            </div>
+        </section>
+        
         
     
     </main>
@@ -145,6 +175,43 @@
         });
     </script>
     
+    <script>
+        // 处理图片上传
+        function handleImageUpload() {
+            const fileInput = document.getElementById('image-upload');
+            const formData = new FormData();
+            formData.append('image', fileInput.files[0]);
+
+            fetch('/predict-image', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultDiv = document.getElementById('image-result');
+                resultDiv.innerHTML = `<h3>预测结果:</h3><img src="data:image/jpeg;base64,${data.image}" />`;
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        // 处理视频上传
+        function handleVideoUpload() {
+            const fileInput = document.getElementById('video-upload');
+            const formData = new FormData();
+            formData.append('video', fileInput.files[0]);
+
+            fetch('/process-video', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultDiv = document.getElementById('video-result');
+                resultDiv.innerHTML = `<h3>视频分析结果:</h3><video controls><source src="data:video/mp4;base64,${data.video}" type="video/mp4"></video>`;
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
 
 </body>
 </html>
