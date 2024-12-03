@@ -1,7 +1,7 @@
 import pymysql
 
 # 连接mysql
-database = pymysql.connect(user='root',password='',host='localhost', charset='utf8mb4')
+database = pymysql.connect(user='root',password='123456',host='localhost', charset='utf8mb4')
 
 # 查看连接状态
 cursor = database.cursor()

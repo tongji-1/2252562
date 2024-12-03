@@ -66,78 +66,6 @@
         </section>
     </main>
     
-
-    <!-- 页脚 -->
-    <footer>
-        <div class="footer-content">
-            <!-- 主要内容区域 -->
-            <div class="footer-main">
-                <!-- 新手入门 -->
-                <div class="footer-section">
-                    <h3>新手入门</h3>
-                    <ul>
-                        <li><a href="/products">产品与服务</a></li>
-                        <li><a href="/solutions">解决方案</a></li>
-                        <li><a href="/docs">开发文档</a></li>
-                    </ul>
-                </div>
-
-                <!-- 商务合作 -->
-                <div class="footer-section">
-                    <h3>技术支持</h3>
-                    <ul>
-                        <li><a href="https://civileng.tongji.edu.cn/main.htm">土木工程学院</a></li>
-                        <li><a href="https://geotec.tongji.edu.cn/main.htm">土木工程信息化</a></li>
-                        <li><a href="https://geotec.tongji.edu.cn/ry/main.htm">课题组</a></li>
-                    </ul>
-                </div>
-
-                <!-- 常见问题 -->
-                <div class="footer-section">
-                    <h3>常见问题</h3>
-                    <ul>
-                        <li><a href="/faq">常见问题汇总</a></li>
-                        <li><a href="/privacy">隐私权政策</a></li>
-                        <li><a href="/account">账号问题</a></li>
-                        <li><a href="/refund">定位反馈</a></li>                            
-                        <li><a href="/agreement">服务协议</a></li>                            
-                        <li><a href="/disclaimer">免责声明</a></li>
-                        <li><a href="/logout">数据退出</a></li>
-                    </ul>
-                </div>
-
-                <!-- 开放平台 -->
-                <div class="footer-section">
-                    <h3>开放平台</h3>
-                    <ul>
-                        <li><a href="/is3">IS3</a></li>
-                    </ul>
-                        
-                    <h3>关注我们</h3>
-                    <ul> 
-                        <li><a href="/">微博</a></li>
-                        <li><a href="/">小红书</a></li>
-                        <li><a href="/">B站</a></li>
-                        <li><a href="/">知乎</a></li>
-                    </ul>
-                       
-                
-                    </div>
-                </div>
-            </div>
-
-            <!-- 版权信息 -->
-            <div class="footer-bottom">
-                <div class="copyright">
-                    © 2024-2024 tiaozhanbeitj.com 版权所有 | ？？？？？ | ？？？？？
-                </div>
-                <div class="beian">
-                    <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">################备案</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         // AJAX请求开始分析
@@ -147,11 +75,14 @@
                 $('#loading-spinner').show();
                 $('#placeholder').hide();
                 $('#results').hide(); // 隐藏结果区域（以防旧数据未清除）
-    
+                
                 // 发起AJAX请求
                 $.ajax({
                     url: '/analyze',  // 假设这是你的后端分析接口
                     type: 'GET',
+                    data: {
+                        flooddata: 'flooddata' 
+                    },
                     success: function(response) {
                         // 显示训练和测试准确率
                         $('#train_acc').text(response.train_acc.toFixed(4));
