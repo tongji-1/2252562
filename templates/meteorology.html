@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>校园内涝态势感知 - 气象水文</title>
+    <title>校园内涝态势感知 - 研究区域</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/meteorology.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/research.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+    
+    <!-- 引入 Leaflet.js 样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
 </head>
 
 <body>
@@ -44,10 +47,9 @@
         
         <section id="situation" class="monitoring-section fade-in">
           <!-- 地图容器 -->
-            <div id="map-meteorology"></div>
+            <div id="map-research"></div>
         </section>
     </main>
-
     <!-- 页脚 -->
     <footer>
         <div class="footer-content">
@@ -119,10 +121,10 @@
         </div>
     </footer>
 
-        <!-- 引入 Leaflet.js 脚本 -->
-        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <!-- 引入 Leaflet.js 脚本 -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
-        <!-- 自定义地图逻辑 -->
-        <script src="{{ url_for('static', filename='scripts/map-meteorology.js') }}"></script>
+    <!-- 自定义地图逻辑 -->
+    <script src="{{ url_for('static', filename='scripts/map-meteorology.js') }}"></script>
 </body>
 </html>

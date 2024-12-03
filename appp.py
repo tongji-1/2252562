@@ -47,9 +47,18 @@ def research():
 @app.route('/api/research')
 def get_research():
     try:
-        with open('api/research.json', 'r', encoding='utf-8') as file:
-            markers = json.load(file)
+        connection = init_db()
+        with connection.cursor() as cursor:
+            # 查询数据库中的研究区域数据
+            query = "SELECT * FROM research"  # 表名为 'research'
+            cursor.execute(query)
+            markers = cursor.fetchall()
+        
+        # 关闭连接
+        connection.close()
+        
         return jsonify(markers)
+    
     except Exception as e:
         return jsonify({'error': str(e)})
 
@@ -61,12 +70,20 @@ def meteorology():
 @app.route('/api/meteorology')
 def get_meteorology():
     try:
-        with open('api/meteorology.json', 'r', encoding='utf-8') as file:
-            markers = json.load(file)
+        connection = init_db()
+        with connection.cursor() as cursor:
+            # 查询数据库中的研究区域数据
+            query = "SELECT * FROM meteorology"  # 表名为 'research'
+            cursor.execute(query)
+            markers = cursor.fetchall()
+        
+        # 关闭连接
+        connection.close()
+        
         return jsonify(markers)
+    
     except Exception as e:
         return jsonify({'error': str(e)})
-
 # 积水径流
 @app.route('/runoff')
 def runoff():
@@ -75,9 +92,18 @@ def runoff():
 @app.route('/api/runoff')
 def get_runoff():
     try:
-        with open('api/runoff.json', 'r', encoding='utf-8') as file:
-            markers = json.load(file)
+        connection = init_db()
+        with connection.cursor() as cursor:
+            # 查询数据库中的研究区域数据
+            query = "SELECT * FROM runoff"  # 表名为 'runoff'
+            cursor.execute(query)
+            markers = cursor.fetchall()
+        
+        # 关闭连接
+        connection.close()
+        
         return jsonify(markers)
+    
     except Exception as e:
         return jsonify({'error': str(e)})
 
@@ -89,9 +115,18 @@ def drainage():
 @app.route('/api/drainage')
 def get_drainage():
     try:
-        with open('api/drainage.json', 'r', encoding='utf-8') as file:
-            markers = json.load(file)
+        connection = init_db()
+        with connection.cursor() as cursor:
+            # 查询数据库中的研究区域数据
+            query = "SELECT * FROM drainage"  # 表名为 'runoff'
+            cursor.execute(query)
+            markers = cursor.fetchall()
+        
+        # 关闭连接
+        connection.close()
+        
         return jsonify(markers)
+    
     except Exception as e:
         return jsonify({'error': str(e)})
 

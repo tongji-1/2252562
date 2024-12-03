@@ -1,11 +1,6 @@
-// 修复 Leaflet 默认图标路径
-L.Icon.Default.mergeOptions({
-    iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
-    iconRetinaUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png',
-    shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png'
-});
 // 初始化地图
-const map = L.map('map-runoff').setView([31.2825, 121.5064], 15); // 设置同济大学四平路校区为中心点，缩放级别为15
+const map = L.map('map-research').setView([31.278637, 121.500476], 15); // 设置同济大学四平路校区为中心点，缩放级别为15
+
 
 // 添加地图瓦片层
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
