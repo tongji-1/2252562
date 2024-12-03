@@ -131,6 +131,7 @@ def analyze():
 
     except Exception as e:
         return jsonify({"error": "Error occurred during analysis: " + str(e)}), 500
+    
 # 应急联动
 @app.route('/analysis')
 def analysis():

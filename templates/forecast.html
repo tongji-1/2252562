@@ -64,6 +64,38 @@
                 <img id="feature_importance_img" src="" alt="Feature Importance" style="max-width: 600px;">
             </div>
         </section>
+
+        <section class="text-image-section">
+            <h1>UNET</h1>
+            <p class="intro">在校园中，降水后若排水系统不畅，容易形成积水，尤其是在低洼地区。积水可能影响校园内的交通、人员安全等，因此及时发现并预测积水情况对校园管理至关重要。传统的积水检测方法多依赖人工监测或简单的阈值判定，存在一定的局限性，容易漏判或误判。而基于深度学习的图像分割方法，能够自动处理大量数据，快速识别积水区域，从而提供更加精准和高效的积水预测。</p>
+            <p class="model-desc">该模型基于深度卷积神经网络（CNN），采用U2Net架构进行图像分割。模型的编码器部分用于提取图像的特征，解码器部分则通过反卷积逐步恢复图像的空间分辨率，生成与输入图像大小一致的分割图。通过这种结构，模型能够有效捕捉不同尺度的积水特征，包括水面反射、阴影、光照变化等，确保在复杂环境下依然能够准确识别积水区域。</p>
+        
+            <div class="image-container">
+                <img src="{{ url_for('static', filename='assets/net.png') }}" alt="网络架构">
+                <p class="image-caption">U2Net架构 - 图像分割网络结构示意</p>
+            </div>
+        
+            <p class="training-desc">在训练过程中，针对积水区域相对较小、类别不平衡的问题，模型使用了自定义的加权二元交叉熵损失函数。该损失函数赋予积水区域（即水体区域）更高的权重，以确保模型在训练时更多地关注积水区域，减少漏判的风险。通过加权损失函数，模型能够在训练过程中优化积水区域的分割精度，避免由于数据不平衡导致的预测偏差。</p>
+        
+            <div class="image-container">
+                <img src="{{ url_for('static', filename='assets/train.png') }}" alt="训练过程">
+                <p class="image-caption">训练过程中的图像分割效果</p>
+            </div>
+        
+            <p class="prediction-desc">通过校园内的监控设备或无人机拍摄的图像,自动识别积水区域，实时反馈积水面积，为校园管理人员提供即时预警。</p>
+        
+            <div class="image-container">
+                <img src="{{ url_for('static', filename='assets/predict.png') }}" alt="预测过程">
+                <p class="image-caption">实时预测积水区域</p>
+            </div>
+        
+            <!-- 可选的CTA按钮 -->
+            <div class="cta-button">
+                <a href="#">了解更多关于积水的技术细节</a>
+            </div>
+        </section>
+        
+    
     </main>
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
