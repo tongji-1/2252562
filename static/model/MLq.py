@@ -41,6 +41,8 @@ class FloodModel:
         ]
         for col in numeric_cols:
             df[col] = pd.to_numeric(df[col], errors='coerce')  # 强制转换，无法转换的值变为 NaN
+        # 如果列中包含无法转换为数字的文本，将其替换为 NaN
+        df['其他因素'] = pd.to_numeric(df['其他因素'], errors='coerce')
 
         # 处理转换后的缺失值
         df = df.fillna(df.median())  # 对于所有列使用中位数填充缺失值
@@ -77,15 +79,23 @@ class FloodModel:
             '排水设施维护状况', '地下管道系统负载', '施工或改建工程',
             '校园垃圾和污染物', '城市排水系统关联性', '洪水风险评分'
         ]
-        
-        # 目标变量：假设有一个二分类列 `洪水热点`
+
+        # 目标变量：生成一个新的目标变量，根据“洪水风险评分”来进行二分类
+        df['洪水热点'] = (df['洪水风险评分'] > 50).astype(int)  # 假设风险评分大于50表示有洪水热点
+
         X = df[features]
         y = df['洪水热点']
 
         # 数据划分
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+        if len(df) > 1:
+            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+        else:
+            X_train, X_test, y_train, y_test = X, X, y, y  # 如果数据只有1行，直接用作训练和测试
 
         # 数据标准化和降维
+        df = df.fillna(df.median())  
+        X = df[features]
+        X = X.fillna(X.median()) 
         scaler = StandardScaler()
         X_train_scaled = scaler.fit_transform(X_train)
         X_test_scaled = scaler.transform(X_test)
