@@ -107,29 +107,6 @@ def get_runoff():
     except Exception as e:
         return jsonify({'error': str(e)})
 
-# 雨污排水
-@app.route('/drainage')
-def drainage():
-    return render_template('drainage.html')
-
-@app.route('/api/drainage')
-def get_drainage():
-    try:
-        connection = init_db()
-        with connection.cursor() as cursor:
-            # 查询数据库中的研究区域数据
-            query = "SELECT * FROM drainage"  # 表名为 'runoff'
-            cursor.execute(query)
-            markers = cursor.fetchall()
-        
-        # 关闭连接
-        connection.close()
-        
-        return jsonify(markers)
-    
-    except Exception as e:
-        return jsonify({'error': str(e)})
-
 # 预报预警
 @app.route('/forecast')
 def forecast():

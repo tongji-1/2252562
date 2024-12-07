@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>校园内涝态势感知 - 积水径流</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/situation.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/runoff.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
 </head>
 
@@ -26,7 +26,6 @@
                     <li><a href="{{ url_for('research') }}">研究区域</a></li>
                     <li><a href="{{ url_for('meteorology') }}">气象水文</a></li>
                     <li><a href="{{ url_for('runoff') }}">积水径流</a></li>
-                    <li><a href="{{ url_for('drainage') }}">雨污排水</a></li>
                 </ul>
             </li>
     
@@ -48,97 +47,10 @@
         </section>
     </main>
 
-    <!-- 页脚 -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-main collapsed" id="footer-main">
-                <!-- 新手入门 -->
-                <div class="footer-section">
-                    <h3>新手入门</h3>
-                    <ul>
-                        <li><a href="/products">产品与服务</a></li>
-                        <li><a href="/solutions">解决方案</a></li>
-                        <li><a href="/docs">开发文档</a></li>
-                    </ul>
-                </div>
+        <!-- 引入高德地图API -->
+        <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=f42b05089589c56b35ded541d9b5dc90&plugin=heatmap"></script>
 
-                <!-- 商务合作 -->
-                <div class="footer-section">
-                    <h3>技术支持</h3>
-                    <ul>
-                        <li><a href="https://civileng.tongji.edu.cn/main.htm">土木工程学院</a></li>
-                        <li><a href="https://geotec.tongji.edu.cn/main.htm">土木工程信息化</a></li>
-                        <li><a href="https://geotec.tongji.edu.cn/ry/main.htm">课题组</a></li>
-                    </ul>
-                </div>
-
-                <!-- 常见问题 -->
-                <div class="footer-section">
-                    <h3>常见问题</h3>
-                    <ul>
-                        <li><a href="/faq">常见问题汇总</a></li>
-                        <li><a href="/privacy">隐私权政策</a></li>
-                        <li><a href="/account">账号问题</a></li>
-                        <li><a href="/refund">定位反馈</a></li>                            
-                        <li><a href="/agreement">服务协议</a></li>                            
-                        <li><a href="/disclaimer">免责声明</a></li>
-                        <li><a href="/logout">数据退出</a></li>
-                    </ul>
-                </div>
-
-                <!-- 开放平台 -->
-                <div class="footer-section">
-                    <h3>开放平台</h3>
-                    <ul>
-                        <li><a href="/is3">IS3</a></li>
-                    </ul>
-                        
-                    <h3>关注我们</h3>
-                    <ul> 
-                        <li><a href="/">微博</a></li>
-                        <li><a href="/">小红书</a></li>
-                        <li><a href="/">B站</a></li>
-                        <li><a href="/">知乎</a></li>
-                    </ul>
-                </div>
-
-            </div>
-        </div>
-                   <!-- 展开/收起按钮 -->
-        <button id="toggle-footer" onclick="toggleFooter()">展开更多</button>
-    </div>
-
-            <!-- 版权信息 -->
-            <div class="footer-bottom">
-                <div class="copyright">
-                    © 2024-2024 tiaozhanbeitj.com 版权所有 | ？？？？？ | ？？？？？
-                </div>
-                <div class="beian">
-                    <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">################备案</a>
-                </div>
-            </div>
-
-        </div>
-    </footer>
-
-<script src="static/scripts/footerToggle.js"></script>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const cards = document.querySelectorAll(".card");
-        cards.forEach((card, index) => {
-            setTimeout(() => {
-                card.classList.add("show");
-            }, index * 150); // 每个卡片延迟150ms依次显示
-        });
-    });
-</script>
-
-
-        <!-- 引入 Leaflet.js 脚本 -->
-        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
-        <!-- 自定义地图逻辑 -->
+         <!-- 引入自定义js 文件 -->
         <script src="{{ url_for('static', filename='scripts/map-runoff.js') }}"></script>
 </body>
 </html>

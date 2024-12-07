@@ -1,33 +1,37 @@
 // 初始化地图
-const map = L.map('map-research').setView([31.278637, 121.500476], 15); // 设置同济大学四平路校区为中心点，缩放级别为15
-
-
-// 添加地图瓦片层
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap contributors'
-}).addTo(map);
+const map = new AMap.Map('map-research', {
+    center: [121.500476, 31.278637], // 设置同济大学四平路校区为中心点
+    zoom: 15 // 设置缩放级别
+});
 
 // 获取标注数据并动态添加到地图
 fetch('/api/runoff')
     .then(response => response.json())
     .then(data => {
         data.forEach(marker => {
-            // 添加每个标注点到地图
-            L.marker([marker.lat, marker.lng]).addTo(map)
-                .bindPopup(marker.info); // 弹窗显示标注信息
+            // 创建并添加标注
+            const amapMarker = new AMap.Marker({
+                position: new AMap.LngLat(marker.lng, marker.lat),
+                title: marker.info
+            });
+            amapMarker.setMap(map);
         });
     });
 
 // 添加图例
-const legend = L.control({ position: 'bottomright' });
-legend.onAdd = function () {
-    const div = L.DomUtil.create('div', 'info legend');
-    div.innerHTML = `
-        <i style="background: #1f77b4; width: 12px; height: 12px; display: inline-block;"></i> 气象水文<br>
-        <i style="background: #ff7f0e; width: 12px; height: 12px; display: inline-block;"></i> 积水径流<br>
-        <i style="background: #2ca02c; width: 12px; height: 12px; display: inline-block;"></i> 雨污排水<br>
-    `;
-    return div;
-};
-legend.addTo(map);
+const legend = document.createElement('div');
+legend.classList.add('info', 'legend');
+legend.style.position = 'absolute';
+legend.style.bottom = '20px';
+legend.style.right = '20px';
+legend.style.backgroundColor = 'white';
+legend.style.padding = '10px';
+legend.style.borderRadius = '5px';
 
+legend.innerHTML = `
+    <i style="background: #1f77b4; width: 12px; height: 12px; display: inline-block;"></i> 气象水文<br>
+    <i style="background: #ff7f0e; width: 12px; height: 12px; display: inline-block;"></i> 积水径流<br>
+    <i style="background: #2ca02c; width: 12px; height: 12px; display: inline-block;"></i> 雨污排水<br>
+`;
+
+document.getElementById('map-research').appendChild(legend);

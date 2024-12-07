@@ -1,63 +1,6 @@
 #analysis{
     height: 100%;
 }
-
-/* 主要内容区域样式 */
-main {
-    font-family: Arial, sans-serif; /* 设置字体 */
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* 设置最小高度为屏幕高度 */
-    background-color: #f4f4f4; /* 背景颜色 */
-}
-
-/* 分析页面区域 */
-#analysis.page {
-    width: 90%; /* 设置页面宽度 */
-    max-width: 1600px; /* 设置最大宽度 */
-    padding: 20px;
-    background-color: white; /* 背景色为白色 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影 */
-    border-radius: 8px; /* 圆角效果 */
-    margin-top: 30px;
-
-}
-
-/* 地址部分样式 */
-.gdmap {
-    text-align: center; /* 地址文本居中 */
-    margin-bottom: 20px;
-}
-
-.gdmap h2 {
-    font-size: 20px;
-    color: #333; /* 设置字体颜色 */
-    margin: 0;
-}
-
-/* 内容部分样式 */
-.content {
-    text-align: center; /* 地图标题居中 */
-}
-
-.content h2 {
-    font-size: 24px;
-    color: #007BFF; /* 设置标题颜色 */
-    margin-bottom: 20px; /* 标题下方间距 */
-}
-
-/* 地图容器样式 */
-#heatmap {
-    width: 100%;
-    height: 1000px;
-    border: 1px solid #ddd; /* 设置地图容器的边框颜色 */
-    border-radius: 8px; /* 地图容器圆角效果 */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加地图容器的阴影 */
-}
-
 /* 响应式布局 */
 @media (max-width: 768px) {
     main {
@@ -79,4 +22,48 @@ main {
     #heatmap {
         height: 400px; /* 小屏幕时，地图高度缩小 */
     }
+}
+
+/* 主要布局 */
+main {
+    width:100%;  /* 宽度设为100%，占据整个父容器宽度 */
+    height: calc(100vh - 20px); /* 高度设为100vh减去顶部的距离 */
+    padding-top: 70px; /* 顶部留出20px的间距 */
+    position: relative; /* 让子元素相对定位 */
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+}
+
+/* 地图容器 */
+#container {
+    width: 75%;  /* 地图宽度占据整个父容器 */
+    height: 100%; /* 地图高度占据整个父容器 */
+    display: flex; /* 使用Flexbox布局 */
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+}
+
+/* 控件容器 */
+.input-card {
+    position: absolute;
+    z-index: 9999; /* 确保控件在地图之上 */
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+#map-styles {
+    width: 100%; /* 控件宽度设为父容器宽度 */
+}
+
+.input-item {
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+}
+
+.input-item input[type="radio"] {
+    margin-right: 8px;
 }
