@@ -6,10 +6,34 @@
     <title>校园内涝态势感知 - 研究区域</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/research.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/meteorology.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
     
     <!-- 引入 Leaflet.js 样式 -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+        <!-- 引入 ECharts 脚本 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+            }
+            .header-section {
+                background-color: #f4f4f4;
+                padding: 20px;
+                text-align: center;
+            }
+            .monitoring-section {
+                padding: 20px;
+            }
+            #chart-container {
+                width: 100%;
+                max-width: 800px;
+                height: 500px;
+                margin: 0 auto;
+            }
+    </style>
 </head>
 
 <body>
@@ -43,95 +67,88 @@
             <h1>气象水文 - 同济大学四平路校区</h1>
             <p>此页面展示了气象水文的实时动态信息，通过下方的交互式地图，您可以查看标注点详情。</p>
         </section>
-        
-        <section id="situation" class="monitoring-section fade-in">
-          <!-- 地图容器 -->
-            <div id="map-research"></div>
-        </section>
-    </main>
-    <!-- 页脚 -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-main collapsed" id="footer-main">
-                <!-- 新手入门 -->
-                <div class="footer-section">
-                    <h3>新手入门</h3>
-                    <ul>
-                        <li><a href="/products">产品与服务</a></li>
-                        <li><a href="/solutions">解决方案</a></li>
-                        <li><a href="/docs">开发文档</a></li>
-                    </ul>
-                </div>
 
-                <!-- 商务合作 -->
-                <div class="footer-section">
-                    <h3>技术支持</h3>
-                    <ul>
-                        <li><a href="https://civileng.tongji.edu.cn/main.htm">土木工程学院</a></li>
-                        <li><a href="https://geotec.tongji.edu.cn/main.htm">土木工程信息化</a></li>
-                        <li><a href="https://geotec.tongji.edu.cn/ry/main.htm">课题组</a></li>
-                    </ul>
-                </div>
-
-                <!-- 常见问题 -->
-                <div class="footer-section">
-                    <h3>常见问题</h3>
-                    <ul>
-                        <li><a href="/faq">常见问题汇总</a></li>
-                        <li><a href="/privacy">隐私权政策</a></li>
-                        <li><a href="/account">账号问题</a></li>
-                        <li><a href="/refund">定位反馈</a></li>                            
-                        <li><a href="/agreement">服务协议</a></li>                            
-                        <li><a href="/disclaimer">免责声明</a></li>
-                        <li><a href="/logout">数据退出</a></li>
-                    </ul>
-                </div>
-
-                <!-- 开放平台 -->
-                <div class="footer-section">
-                    <h3>开放平台</h3>
-                    <ul>
-                        <li><a href="/is3">IS3</a></li>
-                    </ul>
-                        
-                    <h3>关注我们</h3>
-                    <ul> 
-                        <li><a href="/">微博</a></li>
-                        <li><a href="/">小红书</a></li>
-                        <li><a href="/">B站</a></li>
-                        <li><a href="/">知乎</a></li>
-                    </ul>
-                </div>
-
+        <div class="container">
+            <!-- 左侧内容 -->
+            <div class="left-content">
+              <!-- 生成的图表 -->
+              <div id="chart-container"></div>
+          
+              <!-- 存放的图片 -->
+              <img src="{{ url_for('static', filename='assets/地下水位高度与附近水体水位变化趋势.png') }}" 
+                   alt="地下水位高度与附近水体水位变化趋势" class="image-content">
             </div>
-        </div>
-                   <!-- 展开/收起按钮 -->
-        <button id="toggle-footer" onclick="toggleFooter()">展开更多</button>
+          
+            <!-- 右侧内容 -->
+            <div class="right-content">
+              <section id="situation" class="monitoring-section fade-in">
+                <!-- 地图容器 -->
+                <div id="map-research"></div>
+              </section>
+            </div>
+          </div>
+          
+<!-- 数据表格 -->
+<section id="data-table-section">
+    <h2 style="text-align: center; font-family: Arial, sans-serif; margin-bottom: 20px;">数据展示表格</h2>
+    <div style="overflow-x: auto; padding: 20px; background-color: #f9f9f9; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <table id="data-table" class="display" style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background-color: #007BFF; color: #fff; text-align: center;">
+                    <th>降水量(mm)</th>
+                    <th>地形坡度(°)</th>
+                    <th>植被覆盖率</th>
+                    <th>地下水位高度</th>
+                    <th>附近水体水位</th>
+                    <th>地下管道系统负载</th>
+                    <th>城市排水系统关联性</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 动态数据将被加载到这里 -->
+            </tbody>
+        </table>
     </div>
+</section>
 
-            <!-- 版权信息 -->
-            <div class="footer-bottom">
-                <div class="copyright">
-                    © 2024-2024 tiaozhanbeitj.com 版权所有 | ？？？？？ | ？？？？？
-                </div>
-                <div class="beian">
-                    <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">################备案</a>
-                </div>
-            </div>
+    </main>
 
-        </div>
-    </footer>
-
-<script src="static/scripts/footerToggle.js"></script>
+<!-- 引入 DataTables 库 -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const cards = document.querySelectorAll(".card");
-        cards.forEach((card, index) => {
-            setTimeout(() => {
-                card.classList.add("show");
-            }, index * 150); // 每个卡片延迟150ms依次显示
+    $(document).ready(function () {
+        // 初始化表格
+        const table = $('#data-table').DataTable({
+            "paging": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.13.6/i18n/zh-CN.json"
+            }
         });
+
+        // 动态加载数据
+        fetch('{{ url_for("static", filename="scripts/meteorologydata.json") }}') 
+            .then(response => response.json())
+            .then(data => {
+                // 遍历数据并添加到表格
+                data.forEach(row => {
+                    table.row.add([
+                        row["降水量(mm)"],
+                        row["地形坡度(°)"],
+                        row["植被覆盖率"],
+                        row["地下水位高度"],
+                        row["附近水体水位"],
+                        row["地下管道系统负载"],
+                        row["城市排水系统关联性"]
+                    ]).draw(false);
+                });
+            })
+            .catch(error => console.error('数据加载失败:', error));
     });
 </script>
 
@@ -140,5 +157,51 @@
 
     <!-- 自定义地图逻辑 -->
     <script src="{{ url_for('static', filename='scripts/map-meteorology.js') }}"></script>
+
+   <script>
+        // 准备数据
+        const data = {
+            categories: ['样本 1', '样本 2', '样本 3', '样本 4', '样本 5', '样本 6', '样本 7', '样本 8'],
+            series: [
+                { name: '降水量 (mm)', data: [374.54, 950.71, 731.99, 598.66, 156.02, 155.99, 58.08, 866.18] },
+                { name: '地形坡度 (0.01°)', data: [68.24, 2.21, 1.99, 29.12, 43.98, 69.34, 61.50, 40.13] },
+                { name: '植被覆盖率(%)', data: [34.06, 7.17, 40.96, 31.12, 67.71, 60.58, 36.46, 21.79] }
+            ]
+        };
+
+        // 初始化 ECharts 实例
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        // 设置图表的配置项
+        const option = {
+            title: {
+                text: '降水量、地形坡度和植被覆盖率柱状图',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: { type: 'shadow' }
+            },
+            legend: {
+                top: 'bottom'
+            },
+            xAxis: {
+                type: 'category',
+                data: data.categories,
+                axisLabel: { rotate: 30 }
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: data.series.map(item => ({
+                name: item.name,
+                type: 'bar',
+                data: item.data
+            }))
+        };
+
+        // 使用配置项设置图表
+        chart.setOption(option);
+    </script>
 </body>
 </html>

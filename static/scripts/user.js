@@ -1,4 +1,4 @@
-let qaDatabase = [];
+let qaDatabase = []; // 保留以备后用，如果需要基于数据库进一步优化答案
 
 // 从外部JSON文件加载Q&A数据
 fetch('/static/scripts/qaDatabase.json')  
@@ -10,48 +10,41 @@ fetch('/static/scripts/qaDatabase.json')
         console.error("加载Q&A数据库时出错:", error);
     });
 
-function findBestAnswer(userInput) {
-    const lowerCaseInput = userInput.toLowerCase();
-    let bestMatch = null;
-    let highestScore = 0;
+// 调用 OpenAI API 获取最佳答案
+async function findBestAnswer(userInput) {
+    try {
+        const response = await fetch("https://api.openai.com/v1/chat/completions", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": 'Bearer ' + 'sk-xxx' // 请替换为您的 OpenAI API 密钥
+            },
+            body: JSON.stringify({
+                model: "gpt-4o-mini", // 可以选择 gpt-4 或 gpt-3.5-turbo
+                messages: [
+                    { role: "system", content: "你是一个帮助用户回答问题的智能助手。" },
+                    { role: "user", content: userInput }
+                ],
+                max_tokens: 200, // 根据需要调整输出长度
+                temperature: 0.7 // 根据需要调整生成内容的随机性
+            })
+        });
 
-    for (let qa of qaDatabase) {
-        const lowerCaseQuestion = qa.question.toLowerCase();
-        const score = calculateSimilarityScore(lowerCaseInput, lowerCaseQuestion);
+        const data = await response.json();
 
-        if (score > highestScore) {
-            highestScore = score;
-            bestMatch = qa.answer;
+        if (data.choices && data.choices.length > 0) {
+            return data.choices[0].message.content.trim();
+        } else {
+            throw new Error("API 返回的结果无效");
         }
+    } catch (error) {
+        console.error("调用 OpenAI API 时出错:", error);
+        return "抱歉，我无法处理您的请求，请稍后再试或联系技术支持。";
     }
-
-    return highestScore > 0.3 ? bestMatch : "抱歉，我无法理解您的问题，请联系技术支持。";
-}
-
-// 停用词去除函数
-function removeStopWords(words) {
-    const stopWords = ["的", "了", "在", "是"];
-    return words.filter(word => !stopWords.includes(word));
-}
-
-// 余弦相似度计算函数
-function calculateSimilarityScore(input, question) {
-    let inputWords = removeStopWords(input.split(" "));
-    let questionWords = removeStopWords(question.split(" "));
-
-    const wordSet = new Set([...inputWords, ...questionWords]);
-    const inputVector = Array.from(wordSet).map(word => inputWords.filter(w => w === word).length);
-    const questionVector = Array.from(wordSet).map(word => questionWords.filter(w => w === word).length);
-
-    const dotProduct = inputVector.reduce((sum, count, index) => sum + count * questionVector[index], 0);
-    const inputMagnitude = Math.sqrt(inputVector.reduce((sum, count) => sum + count * count, 0));
-    const questionMagnitude = Math.sqrt(questionVector.reduce((sum, count) => sum + count * count, 0));
-
-    return dotProduct / (inputMagnitude * questionMagnitude);
 }
 
 // 事件监听器
-document.getElementById('send-button').onclick = () => {
+document.getElementById('send-button').onclick = async () => {
     const userInput = document.getElementById('user-input').value;
     const chatDisplay = document.getElementById('chat-display');
 
@@ -68,13 +61,12 @@ document.getElementById('send-button').onclick = () => {
         aiMessage.textContent = '正在处理您的请求...';
         chatDisplay.appendChild(aiMessage);
 
-        setTimeout(() => {
-            const bestAnswer = findBestAnswer(userInput);
-            aiMessage.textContent = bestAnswer;
+        // 调用 OpenAI API 获取答案
+        const bestAnswer = await findBestAnswer(userInput);
+        aiMessage.textContent = bestAnswer;
 
-            // 滚动到最新消息
-            chatDisplay.scrollTop = chatDisplay.scrollHeight;
-        }, 1000);
+        // 滚动到最新消息
+        chatDisplay.scrollTop = chatDisplay.scrollHeight;
     }
 };
 

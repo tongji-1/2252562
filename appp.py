@@ -1,7 +1,7 @@
 import pymysql
 from flask import Flask, render_template, jsonify, request
 import json
-from static.model.MLq import FloodModel
+from static.model.ML import FloodModel
 from flask import Flask, render_template, request, jsonify
 import base64
 import io
@@ -107,49 +107,38 @@ def get_runoff():
     except Exception as e:
         return jsonify({'error': str(e)})
 
-# 预报预警
+#预报预警
 @app.route('/forecast')
 def forecast():
     return render_template('forecast.html')
 
 @app.route('/analyze', methods=['GET'])
 def analyze():
-    table_name = request.args.get('flooddata')  # 表名
+    # 使用固定的数据路径
+    data_path = r"E:\test\static\model\flood_data_generated.csv"
+    
+    # 创建FloodModel实例并进行分析
+    model = FloodModel(data_path)
+    model.clean_data()
+    X_train, X_test, y_train, y_test, _, _ = model.prepare_data()
+    rf_model = model.train_random_forest(X_train, y_train)
+    analysis_result = model.evaluate_model(rf_model, X_train, X_test, y_train, y_test)
 
-    if not table_name:
-        return jsonify({"error": "Missing table name"}), 400
+    # 生成图表
+    cm_url, roc_url, feature_importance_url = model.generate_plots(
+        analysis_result['cm'], analysis_result['fpr'], 
+        analysis_result['tpr'], analysis_result['roc_auc'], 
+        analysis_result['feature_importance']
+    )
 
-    try:
-        # 使用 pymysql 初始化数据库连接
-        connection = init_db()
-
-        # 创建 FloodModel 实例并进行分析
-        model = FloodModel(connection, table_name)
-        model.clean_data()
-        X_train, X_test, y_train, y_test, _, _ = model.prepare_data()
-        rf_model = model.train_random_forest(X_train, y_train)
-        analysis_result = model.evaluate_model(rf_model, X_train, X_test, y_train, y_test)
-
-        # 生成图表
-        cm_url, roc_url, feature_importance_url = model.generate_plots(
-            analysis_result['cm'], analysis_result['fpr'],
-            analysis_result['tpr'], analysis_result['roc_auc'],
-            analysis_result['feature_importance']
-        )
-
-        connection.close()  # 关闭数据库连接
-
-        return jsonify({
-            "train_acc": analysis_result["train_acc"],
-            "test_acc": analysis_result["test_acc"],
-            "class_report": analysis_result["class_report"],
-            "cm_url": cm_url,
-            "roc_url": roc_url,
-            "feature_importance_url": feature_importance_url
-        })
-
-    except Exception as e:
-        return jsonify({"error": "Error occurred during analysis: " + str(e)}), 500
+    return jsonify({
+        "train_acc": analysis_result["train_acc"],
+        "test_acc": analysis_result["test_acc"],
+        "class_report": analysis_result["class_report"],
+        "cm_url": cm_url,
+        "roc_url": roc_url,
+        "feature_importance_url": feature_importance_url
+    })
     
 # 图片预测接口
 @app.route('/predict-image', methods=['POST'])

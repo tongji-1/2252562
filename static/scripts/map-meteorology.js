@@ -1,6 +1,5 @@
 // 初始化地图
-const map = L.map('map-research').setView([31.278637, 121.500476], 15); // 设置同济大学四平路校区为中心点，缩放级别为15
-
+const map = L.map('map-research').setView([31.285377, 121.49693], 16.6); // 设置同济大学四平路校区为中心点，缩放级别为15
 
 // 添加地图瓦片层
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
