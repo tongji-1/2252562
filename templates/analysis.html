@@ -61,65 +61,94 @@
               <button class="btn" onclick="heatmap.hide()" style="width: 45%;">关闭</button>
           </div>
       </div>
-      
+    </main>
         <!-- 高德api.js 调用 key value -->
         <script src="https://webapi.amap.com/maps?v=1.4.15&key=6f0e9b5df8e85ae68999cfcb08d82bdb"></script> 
         <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
         <script src="//a.amap.com/jsapi_demos/static/resource/heatmapData.js"></script>
       
         <script>
-          // 初始化地图
-          var map = new AMap.Map('container', {
-              resizeEnable: true,
-              zoom:17, // 初始化地图层级
-              center: [121.501222, 31.283333], // 初始化地图中心点
-              mapStyle: "amap://styles/whitesmoke"
-          });
-
-          // 加载完成地图
-          map.on("complete", function(){
-             log.success("地图加载完成！");  
-          });
-      
-          // 初始化热力图
-          var heatmap;
-          map.plugin(["AMap.Heatmap"], function () {
-              heatmap = new AMap.Heatmap(map, {
-                  radius: 25, // 给定半径
-                  opacity: [0, 0.8]
-              });
-              // 设置热力图数据集
-              heatmap.setDataSet({
-                  data: heatmapData, // 替换数据
-                  max: 100
-              });
-          });
-
-          // 绑定地图样式切换事件
-          var radios = document.querySelectorAll("#map-styles input");
-          radios.forEach(function(ratio) {
-            ratio.onclick = setMapStyle;
-          });
-
-          function setMapStyle() {
-            var styleName = "amap://styles/" + this.value;
-            map.setMapStyle(styleName);
-          }
-
-          // 判断浏览器是否支持Canvas
-          function isSupportCanvas() {
-              var elem = document.createElement('canvas');
-              return !!(elem.getContext && elem.getContext('2d'));
-          }
-
-          // 热力图数据定义
-          var heatmapData = [
-              { lng: 121.501222, lat: 31.283333, count: 90 },
-              { lng: 121.502222, lat: 31.284333, count: 85 },
-              { lng: 121.503222, lat: 31.285333, count: 70 },
-              // 更多数据
-          ];
+            // 全局定义 heatmap 和热力图数据
+            var heatmap = null;
+            var heatmapData = [
+                { lng: 121.50200, lat: 31.283677, count: 10 },
+                { lng: 121.50250, lat: 31.283677, count: 20 },
+                { lng: 121.50300, lat: 31.283677, count: 30 }
+            ];
+        
+            // 初始化地图
+            var map = new AMap.Map('container', {
+                resizeEnable: true,
+                zoom: 17, // 初始化地图层级
+                center: [121.501222, 31.283333], // 初始化地图中心点
+                mapStyle: "amap://styles/whitesmoke"
+            });
+        
+            // 地图加载完成事件
+            map.on("complete", function () {
+                console.log("地图加载完成！");
+                initializeHeatmap(); // 地图加载完成后初始化热力图
+            });
+        
+            // 初始化热力图
+            function initializeHeatmap() {
+                map.plugin(["AMap.Heatmap"], function () {
+                    heatmap = new AMap.Heatmap(map, {
+                        radius: 25, // 给定半径
+                        opacity: [0, 0.8], // 透明度
+                        gradient: {
+                            0.5: 'blue',
+                            0.65: 'rgb(117,211,248)',
+                            0.7: 'rgb(0, 255, 0)',
+                            0.9: '#ffea00',
+                            1.0: 'red'
+                        }
+                    });
+        
+                    // 设置热力图数据集
+                    heatmap.setDataSet({
+                        data: heatmapData,
+                        max: 100
+                    });
+                });
+            }
+        
+            // 显示热力图
+            function showHeatmap() {
+                if (heatmap) {
+                    heatmap.show();
+                } else {
+                    console.error('Heatmap is not initialized yet!');
+                }
+            }
+        
+            // 隐藏热力图
+            function hideHeatmap() {
+                if (heatmap) {
+                    heatmap.hide();
+                } else {
+                    console.error('Heatmap is not initialized yet!');
+                }
+            }
+        
+            // 绑定 radio 点击事件
+            var radios = document.querySelectorAll("#map-styles input");
+            radios.forEach(function (radio) {
+                radio.onclick = setMapStyle;
+            });
+        
+            // 切换地图样式
+            function setMapStyle() {
+                var styleName = "amap://styles/" + this.value;
+                map.setMapStyle(styleName);
+            }
+        
+            // 判断浏览器是否支持 Canvas
+            function isSupportCanvas() {
+                var elem = document.createElement('canvas');
+                return !!(elem.getContext && elem.getContext('2d'));
+            }
         </script>
-    </main>
+        
 </body>
 </html>

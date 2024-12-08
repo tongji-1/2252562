@@ -241,8 +241,8 @@ body {
 
 /* 地图容器样式 */
 #map-research {
-  height: 800px; /* 设置地图高度 */
-  width: 100%;
+  height: 1000px; /* 设置地图高度 */
+  width: 60%;
   max-width: 2000px; /* 限制最大宽度 */
   margin: 20px auto; /* 居中显示 */
   border: 1px solid #ccc; /* 添加边框 */
@@ -319,3 +319,4 @@ body {
   margin: 5px 0;
   color: #555;
 }
+
