@@ -1,5 +1,5 @@
 -- 建立数据库
-drop database if exists flood;
+-- drop database if exists flood;
 create database flood;
 use flood;
 
