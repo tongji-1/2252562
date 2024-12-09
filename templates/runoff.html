@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/runoff.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+    <script src="https://cdn.plot.ly/plotly-2.20.0.min.js"></script>
+
 </head>
 
 <body>
@@ -34,16 +36,22 @@
             <li><a href="{{ url_for('user') }}">帮助中心</a></li>
         </ul>
     </nav>
-
+    <section id="header-info" class="header-sec">
+        <h1>积水径流 - 同济大学四平路校区</h1>
+        <p>此页面展示了积水径流的实时动态信息，通过下方的交互式地图，您可以查看标注点详情。</p>
+    </section>
     <main>
-        <section id="header-info" class="header-sec">
-            <h1>积水径流 - 同济大学四平路校区</h1>
-            <p>此页面展示了积水径流的实时动态信息，通过下方的交互式地图，您可以查看标注点详情。</p>
-        </section>
-        
+
         <section id="situation" class="monitoring-section fade-in">
           <!-- 地图容器 -->
             <div id="map-research"></div>
+        </section>
+
+        <section id="charts-container" class="charts-section fade-in">
+            <!-- 图表容器 -->
+            <div id="chart1" class="chart"></div>
+            <div id="chart2" class="chart"></div>
+            <div id="chart3" class="chart"></div>
         </section>
     </main>
 
@@ -52,5 +60,82 @@
 
          <!-- 引入自定义js 文件 -->
         <script src="{{ url_for('static', filename='scripts/map-runoff.js') }}"></script>
+
+
+        <script>
+            // 图表 1：饼状图
+            var data1 = [
+                {
+                    values: [158.85, 73.31, 383.04, 41.2, 286.84, 77.31, 293.66, 15.48],
+                    labels: ['点位1', '点位2', '点位3', '点位4', '点位5', '点位6', '点位7', '点位8'],
+                    type: 'pie'
+                }
+            ];
+            var layout1 = {
+                title: '排水管网负荷占比饼状图'
+            };
+            Plotly.newPlot('chart1', data1, layout1);
+    
+            // 图表 2：平滑曲线
+            var time = [1, 2, 3, 4, 5, 6, 7, 8];
+            var waterLevels = [-16.33, -12.62, -22.82, -13.01, -13.77, -2.71, -8.27, -14.40];
+            var splineX = [];
+            var splineY = [];
+    
+            for (let i = 1; i <= 8; i += 0.02) {
+                splineX.push(i);
+                splineY.push(-14 + Math.sin(i * Math.PI / 4) * 8); // 示例生成平滑曲线
+            }
+    
+            var data2 = [
+                {
+                    x: time,
+                    y: waterLevels,
+                    mode: 'markers',
+                    name: '原始数据点'
+                },
+                {
+                    x: splineX,
+                    y: splineY,
+                    mode: 'lines',
+                    name: '平滑曲线'
+                }
+            ];
+            var layout2 = {
+                title: '地下水位高度平滑曲线',
+                xaxis: { title: '点位' },
+                yaxis: { title: '水位高度 (m)' }
+            };
+            Plotly.newPlot('chart2', data2, layout2);
+    
+            // 图表 3：热力图
+            var zData = [
+                [1, 0, 1],
+                [1, 0, 0],
+                [0, 1, 1],
+                [0, 1, 0],
+                [1, 1, 0],
+                [0, 1, 0],
+                [1, 0, 1],
+                [1, 1, 0]
+            ];
+            var data3 = [
+                {
+                    z: zData,
+                    x: ['排水设施维护状况', '施工或改建工程', '校园垃圾和污染物'],
+                    y: ['点位1', '点位2', '点位3', '点位4', '点位5', '点位6', '点位7', '点位8'],
+                    type: 'heatmap',
+                    colorscale: 'Blues',
+                    showscale: false
+                }
+            ];
+            var layout3 = {
+                title: '排水设施、施工工程与校园垃圾污染状态',
+                xaxis: { title: '类别' },
+                yaxis: { title: '点位' }
+            };
+            Plotly.newPlot('chart3', data3, layout3);
+        </script>
 </body>
+
 </html>

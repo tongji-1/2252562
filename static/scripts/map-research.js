@@ -14,7 +14,7 @@ fetch('/api/research')
         data.forEach(marker => {
             // 添加每个标注点到地图
             L.marker([marker.lat, marker.lng]).addTo(map)
-                .bindPopup(marker.info); // 弹窗显示标注信息
+                .bindPopup(marker.attribute); // 弹窗显示标注信息
         });
     });
 

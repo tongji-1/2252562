@@ -232,24 +232,6 @@ box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* 添加阴影 */
   color: #666;
 }
 
-
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-/* 地图容器样式 */
-#map-research {
-  height: 1000px; /* 设置地图高度 */
-  width: 60%;
-  max-width: 2000px; /* 限制最大宽度 */
-  margin: 20px auto; /* 居中显示 */
-  border: 1px solid #ccc; /* 添加边框 */
-  border-radius: 8px; /* 圆角效果 */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影 */
-}
-
 /* 响应式调整 */
 @media screen and (max-width: 768px) {
   #map-research {
@@ -320,3 +302,45 @@ body {
   color: #555;
 }
 
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.header-sec {
+  background: #007acc;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 自适应列布局 */
+  grid-gap: 200px; /* 项目之间的间距 */
+  padding: 20px;
+}
+
+
+/* 地图容器样式 */
+#map-research {
+  height: 100%; /* 自动填充父级高度 */
+  background-color: #e6e6e6; /* 灰色背景代表地图 */
+  border: 1px solid #ccc; /* 添加边框 */
+  border-radius: 8px; /* 圆角效果 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+  min-height: 400px; /* 设置地图最小高度 */
+  min-width: 1000px;
+  margin-left: 300px; 
+}
+
+.chart {
+  background-color: white; /* 图表背景色 */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+  min-height: 400px; /* 图表最小高度 */
+  max-width: 400px;
+  margin-left:150px;
+}

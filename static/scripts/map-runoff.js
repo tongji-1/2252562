@@ -9,12 +9,26 @@ fetch('/api/runoff')
     .then(response => response.json())
     .then(data => {
         data.forEach(marker => {
-            // 创建并添加标注
+            // 创建标注
             const amapMarker = new AMap.Marker({
                 position: new AMap.LngLat(marker.lng, marker.lat),
-                title: marker.info
+                title: marker.attribute || '未定义信息' // 悬浮提示
             });
             amapMarker.setMap(map);
+
+            // 创建信息窗口
+            const infoWindow = new AMap.InfoWindow({
+                content: `<div style="padding: 5px;">${marker.attribute || '无信息'}</div>`, // 显示的内容
+                offset: new AMap.Pixel(0, -30) // 调整偏移量
+            });
+
+            // 标注点击事件，打开信息窗口
+            amapMarker.on('click', () => {
+                infoWindow.open(map, amapMarker.getPosition());
+            });
+
+            // 如果需要默认显示信息窗口，可直接打开
+            // infoWindow.open(map, amapMarker.getPosition());
         });
     });
 
