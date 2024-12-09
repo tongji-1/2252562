@@ -67,15 +67,52 @@
         <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
         <script src="//a.amap.com/jsapi_demos/static/resource/heatmapData.js"></script>
       
-        <script>
-            // 全局定义 heatmap 和热力图数据
-            var heatmap = null;
-            var heatmapData = [
-                { lng: 121.50200, lat: 31.283677, count: 10 },
-                { lng: 121.50250, lat: 31.283677, count: 20 },
-                { lng: 121.50300, lat: 31.283677, count: 30 }
-            ];
-        
+ <script>
+    // 全局定义 heatmap 和热力图数据
+    var heatmap = null;
+
+    // 假设矩形区域的宽度和高度（以度为单位）
+    var rectWidth = 0.005; // 宽度0.01度
+    var rectHeight = 0.005; // 高度0.01度
+
+    // 地图中心点
+    var centerLng = 121.501222;
+    var centerLat = 31.283333;
+
+    // 初始化热力图数据数组
+    var heatmapData = [];
+
+    // 行和列的数量
+    var rows = 10;
+    var cols = 10;
+
+    // 生成热力图数据点
+    for (var i = 0; i < rows; i++) {
+        for (var j = 0; j < cols; j++) {
+            // 计算点的经纬度
+            var lng = centerLng + (i - Math.floor(rows / 2)) * rectWidth / (rows / 2);
+            var lat = centerLat + (j - Math.floor(cols / 2)) * rectHeight / (cols / 2);
+
+            // 计算点的权重，中心点权重最高
+            var count = 100 - Math.sqrt((i - Math.floor(rows / 2)) ** 2 + (j - Math.floor(cols / 2)) ** 2) * 20;
+
+            // 将点添加到热力图数据数组
+            heatmapData.push({ "lng": lng, "lat": lat, "count": count });
+        }
+    }
+
+    // 生成随机数据点填充空隙
+    function generateRandomPoints() {
+        for (var k = 0; k < 1000; k++) { // 生成1000个随机点
+            var randomLng = centerLng + (Math.random() - 0.5) * rectWidth * 2;
+            var randomLat = centerLat + (Math.random() - 0.5) * rectHeight * 2;
+            var randomCount = Math.random() * 100; // 随机权重
+            heatmapData.push({ "lng": randomLng, "lat": randomLat, "count": randomCount });
+        }
+    }
+
+    generateRandomPoints(); // 调用函数生成随机点
+
             // 初始化地图
             var map = new AMap.Map('container', {
                 resizeEnable: true,
